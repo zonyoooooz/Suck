@@ -1,0 +1,87 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local ToggleButton = Instance.new("TextButton")
+local DistanceSlider = Instance.new("TextBox")
+local CloseButton = Instance.new("TextButton")
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Name = "ReachGUI"
+
+Main.Size = UDim2.new(0, 220, 0, 180)
+Main.Position = UDim2.new(0.05, 0, 0.3, 0)
+Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Main.BorderSizePixel = 0
+Main.Active = true
+Main.Draggable = true
+Main.Parent = ScreenGui
+
+Title.Text = "⚽ Reach Controller"
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 20
+Title.Parent = Main
+
+ToggleButton.Text = "🔴 Reach: OFF"
+ToggleButton.Size = UDim2.new(0.9, 0, 0, 40)
+ToggleButton.Position = UDim2.new(0.05, 0, 0.35, 0)
+ToggleButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.Font = Enum.Font.SourceSans
+ToggleButton.TextSize = 18
+ToggleButton.Parent = Main
+
+DistanceSlider.Text = "Reach: 25"
+DistanceSlider.Size = UDim2.new(0.9, 0, 0, 30)
+DistanceSlider.Position = UDim2.new(0.05, 0, 0.65, 0)
+DistanceSlider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+DistanceSlider.TextColor3 = Color3.fromRGB(255, 255, 255)
+DistanceSlider.Font = Enum.Font.SourceSans
+DistanceSlider.TextSize = 16
+DistanceSlider.ClearTextOnFocus = false
+DistanceSlider.Parent = Main
+
+CloseButton.Text = "❌"
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 5)
+CloseButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.TextSize = 18
+CloseButton.Parent = Main
+local reachActive = false
+local reachDistance = 25
+
+ToggleButton.MouseButton1Click:Connect(function()
+    reachActive = not reachActive
+    ToggleButton.Text = reachActive and "🟢 Reach: ON" or "🔴 Reach: OFF"
+end)
+
+DistanceSlider.FocusLost:Connect(function()
+    local val = tonumber(DistanceSlider.Text:match("%d+"))
+    if val then
+        reachDistance = val
+        DistanceSlider.Text = "Reach: " .. tostring(val)
+    end
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+game:GetService("RunService").RenderStepped:Connect(function()
+    if not reachActive then return end
+    local char = game.Players.LocalPlayer.Character
+    if not char or not char:FindFirstChild("HumanoidRootPart") then return end
+
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("BasePart") and obj.Name:lower():find("ball") then
+            local dist = (obj.Position - char.HumanoidRootPart.Position).Magnitude
+            if dist <= reachDistance then
+                firetouchinterest(char:FindFirstChild("RightFoot") or char:FindFirstChild("Right Leg"), obj, 0)
+                firetouchinterest(char:FindFirstChild("RightFoot") or char:FindFirstChild("Right Leg"), obj, 1)
+            end
+        end
+    end
+end)
