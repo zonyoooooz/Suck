@@ -1,0 +1,102 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UIS = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "ReachTouchlineGUI"
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 320, 0, 180)
+frame.Position = UDim2.new(0.3, 0, 0.3, 0)
+frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+frame.Parent = gui
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+title.Text = "TOUCHLINE Reach Controller"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.Parent = frame
+
+local toggleBtn = Instance.new("TextButton")
+toggleBtn.Position = UDim2.new(0.1, 0, 0.35, 0)
+toggleBtn.Size = UDim2.new(0.8, 0, 0, 40)
+toggleBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+toggleBtn.Text = "🔴 Reach: OFF"
+toggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleBtn.Font = Enum.Font.Gotham
+toggleBtn.TextSize = 18
+toggleBtn.Parent = frame
+
+local distanceBox = Instance.new("TextBox")
+distanceBox.Position = UDim2.new(0.1, 0, 0.65, 0)
+distanceBox.Size = UDim2.new(0.8, 0, 0, 30)
+distanceBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+distanceBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+distanceBox.Font = Enum.Font.Gotham
+distanceBox.TextSize = 16
+distanceBox.ClearTextOnFocus = false
+distanceBox.Text = "25"
+distanceBox.Parent = frame
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Position = UDim2.new(1, -35, 0, 5)
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Text = "✖"
+closeBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 18
+closeBtn.Parent = frame
+local reachEnabled = false
+local reachDistance = 25
+toggleBtn.MouseButton1Click:Connect(function()
+    reachEnabled = not reachEnabled
+    toggleBtn.Text = reachEnabled and "🟢 Reach: ON" or "🔴 Reach: OFF"
+end)
+distanceBox.FocusLost:Connect(function()
+    local val = tonumber(distanceBox.Text)
+    if val and val > 0 and val <= 100 then
+        reachDistance = val
+        distanceBox.Text = tostring(val)
+    else
+        distanceBox.Text = tostring(reachDistance)
+    end
+end)
+closeBtn.MouseButton1Click:Connect(function()
+    frame.Visible = false
+end)
+UIS.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.M then
+        frame.Visible = not frame.Visible
+    end
+end)
+RunService.RenderStepped:Connect(function()
+    if not reachEnabled then return end
+    local char = player.Character
+    if not char or not char:FindFirstChild("HumanoidRootPart") then return end
+
+    local foot = char:FindFirstChild("RightFoot") or
+                 char:FindFirstChild("Right Leg") or
+                 char:FindFirstChild("LeftFoot") or
+                 char:FindFirstChild("Left Leg")
+    if not foot then return end
+
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("BasePart") and obj.Name:lower():find("ball") then
+            local dist = (obj.Position - char.HumanoidRootPart.Position).Magnitude
+            if dist <= reachDistance then
+                firetouchinterest(foot, obj, 0)
+                firetouchinterest(foot, obj, 1)
+            end
+        end
+    end
+end)
