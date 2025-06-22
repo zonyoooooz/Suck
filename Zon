@@ -1,0 +1,16 @@
+local ball = workspace:WaitForChild("Ball")
+
+local function makeTransparentAndNoCollision(part)
+	if part:IsA("BasePart") then
+		part.Transparency = 1
+		part.CanCollide = false
+	end
+end
+
+if ball:IsA("Model") then
+	for _, part in pairs(ball:GetDescendants()) do
+		makeTransparentAndNoCollision(part)
+	end
+else
+	makeTransparentAndNoCollision(ball)
+end
