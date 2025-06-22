@@ -1,0 +1,33 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local lp = Players.LocalPlayer
+local char = lp.Character or lp.CharacterAdded:Wait()
+local head = char:WaitForChild("Head")
+local ball = workspace:WaitForChild("Ball")
+
+local HEAD_DISTANCE = 7
+local HEADER_FORCE = Vector3.new(0, 100, 180)
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	if gameProcessed then return end
+	if input.KeyCode == Enum.KeyCode.H then
+		if ball and ball:IsDescendantOf(workspace) then
+			local distance = (ball.Position - head.Position).Magnitude
+			if distance <= HEAD_DISTANCE then
+				local bodyVelocity = Instance.new("BodyVelocity")
+				bodyVelocity.Velocity = head.CFrame.lookVector * HEADER_FORCE.Z + Vector3.new(0, HEADER_FORCE.Y, 0)
+				bodyVelocity.MaxForce = Vector3.new(1e6, 1e6, 1e6)
+				bodyVelocity.P = 1e5
+				bodyVelocity.Parent = ball
+
+				game.Debris:AddItem(bodyVelocity, 0.2)
+
+				print("Header Activated!")
+			else
+				print("Ball too far to header.")
+			end
+		else
+			print("Ball not found.")
+		end
+	end
+end)
