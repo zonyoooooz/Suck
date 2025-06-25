@@ -1,0 +1,37 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+local ball = workspace:FindFirstChild("Ball")
+
+local runService = game:GetService("RunService")
+local userInputService = game:GetService("UserInputService")
+
+local active = false
+
+if ball then
+	ball.Anchored = false
+	if not ball:FindFirstChild("BodyVelocity") then
+		local bv = Instance.new("BodyVelocity")
+		bv.Name = "HoldVelocity"
+		bv.Velocity = Vector3.new(0, 0, 0)
+		bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+		bv.Parent = ball
+	end
+end
+
+userInputService.InputBegan:Connect(function(input, gameProcessed)
+	if gameProcessed then return end
+	if input.KeyCode == Enum.KeyCode.Q then
+		active = not active
+	end
+end)
+
+runService.RenderStepped:Connect(function()
+	if active and ball and hrp then
+		ball.Position = hrp.Position + Vector3.new(0, -1.5, 0)
+		ball.Velocity = Vector3.new(0, 0, 0)
+	elseif not active and ball then
+		local bv = ball:FindFirstChild("HoldVelocity")
+		if bv then bv:Destroy() end
+	end
+end)
