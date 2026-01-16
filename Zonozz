@@ -1,0 +1,1292 @@
+local String_Match, String_Match_2, PlayerReachIndicator, Vector3_New, Material, BallToBodyReachIndicator, RenderStepped, Connected, Connected_2, Right_Leg, TPSSystem, Balls, Connected_3, HeadToBallReachIndicator, Connected_4, Connected_5, Head, TPS, r917, Connected_6, LocalPlayer_Backpack, Supskidder1, TPSSystem_2, TPS_2, Supskidder1_2, TPS_3, Workspace, Connected_7, Decal, Connected_8, Connected_9, Request;
+local fenv = getfenv();
+pcall(function(a, b, c)
+    getgenv()["25ms was here :)"] = function(a_3, b_3, c_3) end;
+end);
+if loadstring then
+    loadstring("return pcall(function()return 1/\"abc\"end)");
+    loadstring([[
+return pcall(function()return 1/"abc"end)]]);
+end;
+pcall(fenv.getrawmetatable);
+local _ = not r5;
+pcall(function(p1_3, p2_3, a_3, b_3, c_3, ...)
+    fenv.setreadonly(r5, false);
+end);
+r5.__namecall = newcclosure(function(a_3, b_3, c_3, ...)
+    if not string.lower(
+        tostring(a_3)
+    ):find("noneedjealousy") then
+    else
+
+    end;
+    local _ = ((fenv.getnamecallmethod() == "FireServer"));
+    -- false
+    return r5.__namecall(a_3, b_3, c_3, ...);
+end);
+local Players = game.Players;
+local LocalPlayer = Players.LocalPlayer;
+local LocalPlayer_Character = LocalPlayer.Character;
+for for_key_0, for_val_0 in pairs(LocalPlayer_Character:GetChildren()) do -- for loop 1 start
+    if for_key_0 then
+        local _ = ((for_val_0.Name == " "));
+        -- false
+    end;
+end -- for loop 1 end;
+for for_key_1, for_val_1 in pairs(LocalPlayer_Character:GetChildren()) do -- for loop 2 start
+    if not for_key_1 then
+    else
+
+    end;
+    if not for_val_1:IsA("LocalScript") then
+    else
+        String_Match = string.match(for_val_1.Name, "1");
+    end;
+    if not String_Match then
+    else
+        if String_Match then
+            for_val_1:Destroy();
+        end;
+    end;
+end -- for loop 2 end;
+local Start = LocalPlayer.PlayerGui.Start;
+for for_key_2, for_val_2 in pairs(Start:GetChildren()) do -- for loop 3 start
+    if for_key_2 then
+
+    end;
+    if for_val_2:IsA("LocalScript") then
+        String_Match_2 = string.match(for_val_2.Name, "1");
+    end;
+    if String_Match_2 then
+        if String_Match_2 then
+            for_val_2:Destroy();
+        end;
+    end;
+end -- for loop 3 end;
+for for_key_3, for_val_3 in pairs(Start:GetChildren()) do -- for loop 4 start
+    if for_key_3 then
+        local _ = ((for_val_3.Name == "CheckPlayerW"));
+        -- false
+    end;
+end -- for loop 4 end;
+local Start_2 = game.StarterGui.Start;
+for for_key_4, for_val_4 in pairs(Start_2:GetChildren()) do -- for loop 5 start
+    if for_key_4 then
+        local _ = ((for_val_4.Name == "CheckPlayerW"));
+        -- false
+    end;
+end -- for loop 5 end;
+for for_key_5, for_val_5 in pairs(game.StarterPlayer.StarterCharacterScripts:GetDescendants()) do -- for loop 6 start
+    if not for_key_5 then
+    else
+        local _ = ((for_val_5.Name == " "));
+        -- false
+    end;
+end -- for loop 6 end;
+local CharacterAdded = LocalPlayer.CharacterAdded;
+CharacterAdded:Connect(function(p1_4, p2_4, p3_4, p4_4, p5_4, a_4, b_4, c_4, ...)
+    wait(0.5);
+    for for_key_8, for_val_8 in pairs(LocalPlayer_Character:GetChildren()) do -- for loop 9 start
+        if for_key_8 then
+            local _ = ((for_val_8.Name == " "));
+            -- false
+        end;
+    end -- for loop 9 end;
+end);
+for for_key_6, for_val_6 in pairs(Start_2:GetChildren()) do -- for loop 7 start
+    if for_key_6 then
+        local _ = ((for_val_6.Name == "Gradient"));
+        -- false
+    end;
+end -- for loop 7 end;
+for for_key_7, for_val_7 in pairs(Start:GetChildren()) do -- for loop 8 start
+    if for_key_7 then
+        local _ = ((for_val_7.Name == "Gradient"));
+        -- false
+    end;
+end -- for loop 8 end;
+local Rayfield = loadstring(
+    game:HttpGet("https://sirius.menu/rayfield")
+)();
+local Window = Rayfield:CreateWindow({
+    ["LoadingTitle"] = "TPS Street Soccer",
+    ["Name"] = "TPS Street Soccer 971",
+    ["KeySystem"] = false,
+    ["LoadingSubtitle"] = "by h8r 971 Hub",
+    ["Settings"] = {
+        ["Theme"] = "Dark"
+    },
+    ["ConfigurationSaving"] = {
+        ["Enabled"] = true,
+        ["FolderName"] = "Tps Street scoccer 971 hub",
+        ["FileName"] = "Config"
+    }
+});
+local Key = Window:CreateTab("Key", 4483362458);
+Key:CreateInput({
+    ["Name"] = "Enter Key",
+    ["Flag"] = "KeyInput",
+    ["CurrentValue"] = "",
+    ["PlaceholderText"] = "Enter key here",
+    ["Callback"] = function(p1_5, p2_5, a_5, b_5, c_5, ...)
+
+    end,
+    ["RemoveTextAfterFocusLost"] = false
+});
+Key:CreateButton({
+    ["Name"] = "Join Discord Server to get key",
+    ["Callback"] = function(p1_6, a_6, b_6, c_6, ...)
+        pcall(function(p1_7, p2_7, p3_7, p4_7, a_7, b_7, c_7, ...)
+            fenv.setclipboard("https://discord.gg/CfbQjrrz3w");
+        end);
+        Rayfield:Notify({
+            ["Duration"] = 5,
+            ["Title"] = "Discord Copied",
+            ["Content"] = "Discord invite copied to clipboard: https://discord.gg/CfbQjrrz3w"
+        });
+    end
+});
+Key:CreateButton({
+    ["Name"] = "Verify Key",
+    ["Callback"] = function(a_8, b_8, c_8, ...)
+        -- true
+        if not ((tostring(
+            tostring(p1_5)
+        ) == "tps971!")) then
+        else
+            Rayfield:Notify({
+                ["Duration"] = 3,
+                ["Title"] = "Key Accepted",
+                ["Content"] = "All tabs unlocked successfully!"
+            });
+        end;
+        local Info = Window:CreateTab("Info", 4483362458);
+        local Reach_Leg = Window:CreateTab("Reach Leg", 4483362458);
+        local Reach_Head = Window:CreateTab("Reach Head", 4483362458);
+        local React = Window:CreateTab("React", 4483362458);
+        local GK = Window:CreateTab("GK", 4483362458);
+        local Ball_Mods = Window:CreateTab("Ball Mods", 4483362458);
+        local Player = Window:CreateTab("Player", 4483362458);
+        local Misc = Window:CreateTab("Misc", 4483362458);
+        Info:CreateSection("Info");
+        Info:CreateParagraph({
+            ["Title"] = "TPS Soccer 971hub",
+            ["Content"] = [[by h8r
+Discord Server: https://discord.gg/jjqgAzUcPW]]
+        });
+        PlayerReachIndicator = Instance.new("Part");
+        PlayerReachIndicator.Name = "PlayerReachIndicator";
+        local PartType = Enum.PartType;
+        PlayerReachIndicator.Shape = PartType.Block;
+        Vector3_New = Vector3.new;
+        PlayerReachIndicator.Size = Vector3_New(5, 5, 5);
+        local FromRGB = Color3.fromRGB;
+        PlayerReachIndicator.Color = FromRGB(0, 255, 0);
+        Material = Enum.Material;
+        PlayerReachIndicator.Material = Material.Neon;
+        PlayerReachIndicator.Transparency = 0.7;
+        PlayerReachIndicator.Anchored = true;
+        PlayerReachIndicator.CanCollide = false;
+        PlayerReachIndicator.Parent = workspace;
+        BallToBodyReachIndicator = Instance.new("Part");
+        BallToBodyReachIndicator.Name = "BallToBodyReachIndicator";
+        BallToBodyReachIndicator.Shape = PartType.Ball;
+        BallToBodyReachIndicator.Size = Vector3_New(5, 5, 5);
+        BallToBodyReachIndicator.Color = FromRGB(0, 0, 255);
+        BallToBodyReachIndicator.Material = Material.Neon;
+        BallToBodyReachIndicator.Transparency = 0.7;
+        BallToBodyReachIndicator.Anchored = true;
+        BallToBodyReachIndicator.CanCollide = false;
+        BallToBodyReachIndicator.Parent = workspace;
+        Reach_Leg:CreateSection("Leg Reach");
+        Reach_Leg:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Enable Leg Reach",
+            ["Callback"] = function(p1_11, p2_11, p3_11, p4_11, p5_11, a_11, b_11, c_11, ...)
+                if p1_11 then
+                    game:GetService("RunService");
+                end;
+                RenderStepped = r360.RenderStepped;
+                Connected = RenderStepped:Connect(function(p1_50, p2_50, p3_50, p4_50, a_50, b_50, c_50, ...)
+                    if LocalPlayer_Character then
+
+                    end;
+                    if not LocalPlayer_Character.Parent then
+                    end;
+                end);
+            end
+        });
+        Reach_Leg:CreateToggle({
+            ["CurrentValue"] = true,
+            ["Name"] = "Show Leg Reach Indicator",
+            ["Callback"] = function(p1_12, p2_12, p3_12, a_12, b_12, c_12, ...) end
+        });
+        Reach_Leg:CreateSection("Leg Reach Position Offset");
+        Reach_Leg:CreateSlider({
+            ["Name"] = "X Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_12, p2_12, a_12, b_12, c_12, ...) end
+        });
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Y Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_12, p2_12, p3_12, p4_12, p5_12, a_12, b_12, c_12, ...) end
+        });
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Z Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_12, a_12, b_12, c_12, ...) end
+        });
+        Reach_Leg:CreateButton({
+            ["Name"] = "Reset Leg Reach Offset to 0",
+            ["Callback"] = function(p1_12, p2_12, p3_12, a_12, b_12, c_12, ...)
+                Rayfield:Notify({
+                    ["Duration"] = 3,
+                    ["Title"] = "Offset Reset",
+                    ["Content"] = "Leg Reach offset reset to 0,0,0"
+                });
+            end
+        });
+        Reach_Leg:CreateSection("Leg Reach Size");
+        Reach_Leg:CreateSlider({
+            ["Name"] = "X Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 5,
+            ["Increment"] = 1,
+            ["Range"] = {
+                1,
+                50
+            },
+            ["Callback"] = function(p1_13, p2_13, p3_13, p4_13, p5_13, p6_13, a_13, b_13, c_13, ...)
+                PlayerReachIndicator.Size = Vector3_New(p1_13, 5, 5);
+            end
+        });
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Y Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 5,
+            ["Increment"] = 1,
+            ["Range"] = {
+                1,
+                50
+            },
+            ["Callback"] = function(p1_14, p2_14, p3_14, p4_14, p5_14, p6_14, a_14, b_14, c_14, ...)
+                PlayerReachIndicator.Size = Vector3_New(p1_13, p1_14, 5);
+            end
+        });
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Z Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 5,
+            ["Increment"] = 1,
+            ["Range"] = {
+                1,
+                50
+            },
+            ["Callback"] = function(p1_15, p2_15, p3_15, p4_15, a_15, b_15, c_15, ...)
+                PlayerReachIndicator.Size = Vector3_New(p1_13, p1_14, p1_15);
+            end
+        });
+        Reach_Leg:CreateSection("Potato Leg Reach");
+        Reach_Leg:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Potato Leg Reach",
+            ["Callback"] = function(p1_16, p2_16, p3_16, p4_16, a_16, b_16, c_16, ...)
+                local _ = not p1_16;
+                game:GetService("RunService");
+                Connected_2 = r361:Connect(function(p1_51, a_51, b_51, c_51, ...)
+                    local _ = not LocalPlayer_Character;
+                    Right_Leg = LocalPlayer_Character:FindFirstChild("Right Leg");
+                    if Right_Leg then
+                        if LocalPlayer_Character:FindFirstChild("HumanoidRootPart") then
+                            local _ = not Right_Leg;
+                        end;
+                    end;
+                    TPSSystem = workspace:FindFirstChild("TPSSystem");
+                    if not TPSSystem then
+                    else
+
+                    end;
+                    for for_key_14, for_val_14 in ipairs(TPSSystem:GetChildren()) do -- for loop 15 start
+                        if not for_key_14 then
+                        else
+
+                        end;
+                        if not for_val_14:IsA("BasePart") then
+                        else
+                            local _ = ((for_val_14.Name == "TPS"));
+                            -- false
+                        end;
+                    end -- for loop 15 end;
+                    Balls = workspace:FindFirstChild("Balls");
+                    if not Balls then
+                    else
+
+                    end;
+                    for for_key_15, for_val_15 in ipairs(Balls:GetChildren()) do -- for loop 16 start
+                        if not for_key_15 then
+                        else
+
+                        end;
+                        if not for_val_15:IsA("BasePart") then
+                        else
+                            local _ = ((for_val_15.Name == "TPS"));
+                            -- false
+                        end;
+                    end -- for loop 16 end;
+                end);
+                if not p1_16 then
+                else
+                    Rayfield:Notify({
+                        ["Duration"] = 2,
+                        ["Title"] = "Potato Leg Reach",
+                        ["Content"] = "Enabled - Size: 7"
+                    });
+                end;
+            end
+        });
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Potato Leg Reach Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 7,
+            ["Increment"] = 1,
+            ["Range"] = {
+                0,
+                30
+            },
+            ["Callback"] = function(p1_17, p2_17, p3_17, p4_17, p5_17, a_17, b_17, c_17, ...) end
+        });
+        Reach_Leg:CreateSection("Ball Reach");
+        Reach_Leg:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Enable Ball Reach",
+            ["Callback"] = function(p1_17, p2_17, p3_17, p4_17, p5_17, p6_17, a_17, b_17, c_17, ...)
+                if p1_17 then
+                    game:GetService("RunService");
+                end;
+                Connected_3 = RenderStepped:Connect(function(a_52, b_52, c_52, ...)
+                    if not LocalPlayer_Character then
+                    else
+
+                    end;
+                    if not LocalPlayer_Character.Parent then
+                    end;
+                end);
+            end
+        });
+        Reach_Leg:CreateToggle({
+            ["CurrentValue"] = true,
+            ["Name"] = "Show Ball Reach Indicator",
+            ["Callback"] = function(p1_18, a_18, b_18, c_18, ...) end
+        });
+        Reach_Leg:CreateSection("Ball Reach Position Offset");
+        Reach_Leg:CreateSlider({
+            ["Name"] = "X Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_18, p2_18, p3_18, p4_18, p5_18, a_18, b_18, c_18, ...) end
+        });
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Y Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_18, p2_18, p3_18, p4_18, p5_18, a_18, b_18, c_18, ...) end
+        });
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Z Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_18, p2_18, p3_18, p4_18, p5_18, a_18, b_18, c_18, ...) end
+        });
+        Reach_Leg:CreateButton({
+            ["Name"] = "Reset Ball Reach Offset to 0",
+            ["Callback"] = function(p1_18, p2_18, a_18, b_18, c_18, ...)
+                Rayfield:Notify({
+                    ["Duration"] = 3,
+                    ["Title"] = "Offset Reset",
+                    ["Content"] = "Ball Reach offset reset to 0,0,0"
+                });
+            end
+        });
+        Reach_Leg:CreateSection("Ball Reach Size");
+        Reach_Leg:CreateSlider({
+            ["Name"] = "Ball Reach Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 5,
+            ["Increment"] = 1,
+            ["Range"] = {
+                1,
+                50
+            },
+            ["Callback"] = function(p1_19, p2_19, p3_19, p4_19, a_19, b_19, c_19, ...)
+                BallToBodyReachIndicator.Size = Vector3_New(p1_19, p1_19, p1_19);
+            end
+        });
+        HeadToBallReachIndicator = Instance.new("Part");
+        HeadToBallReachIndicator.Name = "HeadToBallReachIndicator";
+        HeadToBallReachIndicator.Shape = PartType.Block;
+        HeadToBallReachIndicator.Size = Vector3_New(5, 5, 5);
+        HeadToBallReachIndicator.Color = FromRGB(255, 0, 0);
+        HeadToBallReachIndicator.Material = Material.Neon;
+        HeadToBallReachIndicator.Transparency = 0.7;
+        HeadToBallReachIndicator.Anchored = true;
+        HeadToBallReachIndicator.CanCollide = false;
+        HeadToBallReachIndicator.Parent = workspace;
+        Reach_Head:CreateSection("Head Reach");
+        Reach_Head:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Enable Head Reach",
+            ["Callback"] = function(p1_20, a_20, b_20, c_20, ...)
+                if p1_20 then
+                    game:GetService("RunService");
+                end;
+                Connected_4 = RenderStepped:Connect(function(p1_53, p2_53, p3_53, p4_53, p5_53, a_53, b_53, c_53, ...)
+                    if LocalPlayer_Character then
+
+                    end;
+                    if LocalPlayer_Character.Parent then
+                    else
+                    end;
+                end);
+            end
+        });
+        Reach_Head:CreateToggle({
+            ["CurrentValue"] = true,
+            ["Name"] = "Show Head Reach Indicator",
+            ["Callback"] = function(p1_21, p2_21, p3_21, p4_21, p5_21, p6_21, a_21, b_21, c_21, ...) end
+        });
+        Reach_Head:CreateSection("Head Reach Position Offset");
+        Reach_Head:CreateSlider({
+            ["Name"] = "X Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_21, p2_21, p3_21, a_21, b_21, c_21, ...) end
+        });
+        Reach_Head:CreateSlider({
+            ["Name"] = "Y Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_21, p2_21, p3_21, p4_21, p5_21, a_21, b_21, c_21, ...) end
+        });
+        Reach_Head:CreateSlider({
+            ["Name"] = "Z Position Offset",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 0,
+            ["Increment"] = 1,
+            ["Range"] = {
+                -50,
+                50
+            },
+            ["Callback"] = function(p1_21, p2_21, p3_21, p4_21, p5_21, a_21, b_21, c_21, ...) end
+        });
+        Reach_Head:CreateButton({
+            ["Name"] = "Reset Head Reach Offset to 0",
+            ["Callback"] = function(p1_21, p2_21, p3_21, a_21, b_21, c_21, ...)
+                Rayfield:Notify({
+                    ["Duration"] = 3,
+                    ["Title"] = "Offset Reset",
+                    ["Content"] = "Head Reach offset reset to 0,0,0"
+                });
+            end
+        });
+        Reach_Head:CreateSection("Head Reach Size");
+        Reach_Head:CreateSlider({
+            ["Name"] = "X Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 5,
+            ["Increment"] = 1,
+            ["Range"] = {
+                1,
+                50
+            },
+            ["Callback"] = function(p1_22, p2_22, p3_22, p4_22, p5_22, a_22, b_22, c_22, ...)
+                HeadToBallReachIndicator.Size = Vector3_New(p1_22, 5, 5);
+            end
+        });
+        Reach_Head:CreateSlider({
+            ["Name"] = "Y Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 5,
+            ["Increment"] = 1,
+            ["Range"] = {
+                1,
+                50
+            },
+            ["Callback"] = function(p1_23, p2_23, a_23, b_23, c_23, ...)
+                HeadToBallReachIndicator.Size = Vector3_New(p1_22, p1_23, 5);
+            end
+        });
+        Reach_Head:CreateSlider({
+            ["Name"] = "Z Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 5,
+            ["Increment"] = 1,
+            ["Range"] = {
+                1,
+                50
+            },
+            ["Callback"] = function(p1_24, p2_24, p3_24, a_24, b_24, c_24, ...)
+                HeadToBallReachIndicator.Size = Vector3_New(p1_22, p1_23, p1_24);
+            end
+        });
+        Reach_Head:CreateSection("Method 2 Potato Reach Head");
+        Reach_Head:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Potato Reach Head",
+            ["Callback"] = function(p1_25, p2_25, p3_25, p4_25, p5_25, p6_25, a_25, b_25, c_25, ...)
+                local _ = not p1_25;
+                game:GetService("RunService");
+                Connected_5 = RenderStepped:Connect(function(p1_54, p2_54, a_54, b_54, c_54, ...)
+                    if LocalPlayer then
+                        if LocalPlayer_Character then
+                            Head = LocalPlayer_Character:FindFirstChild("Head");
+                        end;
+                    end;
+                    if not LocalPlayer_Character then
+                    else
+                        local _ = not Head;
+                    end;
+                    if not workspace:FindFirstChild("TPSSystem") then
+                    else
+                        TPS = r624:FindFirstChild("TPS");
+                    end;
+                    local _ = not TPS;
+                    local Position = Head.Position;
+                    r917 = (TPS.Position.Y - Position.Y);
+                    if (((Position - TPS.Position)).Magnitude <= p1_26) then
+
+                    end;
+                    if (r917 > 0) then
+
+                    end;
+                    if not ((r917 <= 8)) then
+                    else
+                        fenv.firetouchinterest(Head, TPS, 0);
+                    end;
+                    fenv.firetouchinterest(Head, TPS, 1);
+                end);
+                if p1_25 then
+                    Rayfield:Notify({
+                        ["Duration"] = 2,
+                        ["Title"] = "Potato Head Reach",
+                        ["Content"] = "Enabled - Size: 8"
+                    });
+                end;
+            end
+        });
+        Reach_Head:CreateSlider({
+            ["Name"] = "Potato Reach Head Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 8,
+            ["Increment"] = 1,
+            ["Range"] = {
+                0,
+                20
+            },
+            ["Callback"] = function(p1_26, p2_26, a_26, b_26, c_26, ...) end
+        });
+        React:CreateSection("React Features");
+        React:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Better React",
+            ["Callback"] = function(p1_26, p2_26, p3_26, p4_26, p5_26, a_26, b_26, c_26, ...)
+                if p1_26 then
+                    game:GetService("RunService");
+                end;
+                Connected_6 = RenderStepped:Connect(function(p1_55, p2_55, a_55, b_55, c_55, ...)
+                    local LocalPlayer_Character_Humanoid = LocalPlayer_Character.Humanoid;
+                    local HumanoidRigType = Enum.HumanoidRigType;
+                    local _ = ((LocalPlayer_Character_Humanoid.RigType == HumanoidRigType.R6));
+                    -- false
+                    local _ = ((LocalPlayer_Character_Humanoid.RigType == HumanoidRigType.R15));
+                    -- false
+                end);
+            end
+        });
+        React:CreateParagraph({
+            ["Title"] = "Replication Lag-Ping",
+            ["Content"] = "Use 0.02 - 0.07 For Tricks and Insane React"
+        });
+        React:CreateInput({
+            ["Callback"] = function(p1_27, p2_27, a_27, b_27, c_27, ...)
+                fenv.settings():GetService("NetworkSettings").IncomingReplicationLag = tonumber(p1_27);
+            end,
+            ["PlaceholderText"] = "0",
+            ["Name"] = "Replication Lag-Ping",
+            ["RemoveTextAfterFocusLost"] = false
+        });
+        React:CreateSection("Infinite Tackle");
+        React:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Infinite Tackle",
+            ["Callback"] = function(p1_28, p2_28, p3_28, p4_28, p5_28, p6_28, a_28, b_28, c_28, ...)
+                if not p1_28 then
+                else
+                    if not p1_28 then
+                    else
+                        task.wait();
+                    end;
+                end;
+                if LocalPlayer then
+                    LocalPlayer_Backpack = LocalPlayer.Backpack;
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                if not p1_28 then
+                else
+                    task.wait();
+                end;
+                if LocalPlayer then
+
+                end;
+                if LocalPlayer_Backpack:FindFirstChild("TackleCooldown") then
+                    LocalPlayer_Backpack.TackleCooldown.Value = 0;
+                end;
+                local _ = not p1_28;
+            end
+        });
+        React:CreateSection("Infinite Air Dribble");
+        React:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Infinite Air Dribble",
+            ["Callback"] = function(p1_29, p2_29, p3_29, p4_29, p5_29, a_29, b_29, c_29, ...)
+                if not p1_29 then
+                else
+                    Supskidder1 = Instance.new("Part");
+                end;
+                Supskidder1.Name = "supskidder1";
+                Supskidder1.Size = Vector3_New(25, 0, 25);
+                Supskidder1.Anchored = true;
+                Supskidder1.BrickColor = BrickColor.new("Bright red");
+                Supskidder1.Transparency = 1;
+                Supskidder1.Parent = workspace;
+                if workspace:FindFirstChild("TPSSystem") then
+                    TPSSystem_2 = workspace.TPSSystem;
+                    TPS_2 = TPSSystem_2:FindFirstChild("TPS");
+                end;
+                if not TPS_2 then
+                else
+                    Supskidder1.Position = (TPS_2.Position - Vector3_New(0, 1, 0));
+                end;
+                game:GetService("RunService");
+                RenderStepped:Connect(function(p1_56, p2_56, a_56, b_56, c_56, ...)
+                    if not TPS_2 then
+                    else
+                        Supskidder1.Position = (TPS_2.Position - Vector3_New(0, 1, 0));
+                    end;
+                end);
+            end
+        });
+        React:CreateSlider({
+            ["Name"] = "Air Dribble Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 25,
+            ["Increment"] = 1,
+            ["Range"] = {
+                0,
+                50
+            },
+            ["Callback"] = function(p1_30, p2_30, p3_30, p4_30, a_30, b_30, c_30, ...)
+                Supskidder1_2 = workspace:FindFirstChild("supskidder1");
+                if Supskidder1_2 then
+                    Supskidder1_2.Size = Vector3_New(p1_30, 0, p1_30);
+                end;
+            end
+        });
+        React:CreateSection("Ball Direction");
+        React:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Show Ball Direction",
+            ["Callback"] = function(p1_31, p2_31, a_31, b_31, c_31, ...)
+                if p1_31 then
+                    game:GetService("RunService");
+                end;
+                game:GetService("Workspace");
+                if workspace:FindFirstChild("TPSSystem") then
+                    TPS_3 = TPSSystem_2:FindFirstChild("TPS");
+                end;
+                if TPS_3 then
+                    local _ = not TPS_3;
+                end;
+                RenderStepped:Connect(function(p1_57, p2_57, p3_57, p4_57, p5_57, a_57, b_57, c_57, ...)
+                    local _ = not TPS_3;
+                    local _ = not TPS_3:IsA("BasePart");
+                    local Velocity = TPS_3.Velocity;
+                    if not ((((TPS_3.Position + Vector3_New((Velocity.X * 0.01), ((Velocity.Y * 0.01) - (((0.5 * workspace.Gravity) * 0.01) * 0.01)), (Velocity.Z * 0.01)))).Y < 0)) then
+                    else
+                    end;
+                end);
+            end
+        });
+        GK:CreateSection("Goalkeeper Features");
+        GK:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Auto Save [Touch Method]",
+            ["Callback"] = function(p1_32, a_32, b_32, c_32, ...)
+                if p1_32 then
+                    Workspace = game.Workspace;
+                    Connected_7 = Workspace.TPSSystem.TPS.Touched:Connect(function(p1_58, p2_58, p3_58, a_58, b_58, c_58, ...)
+                        -- true
+                        if (p1_58 == LocalPlayer_Character.HumanoidRootPart) then
+
+                        end;
+                        for for_key_16, for_val_16 in pairs(Workspace:GetDescendants()) do -- for loop 17 start
+                            if not for_key_16 then
+                            else
+                                local _ = ((for_val_16.Name == "TPS"));
+                                -- false
+                            end;
+                        end -- for loop 17 end;
+                    end);
+                end;
+            end
+        });
+        Ball_Mods:CreateSection("Ball Modifications");
+        Ball_Mods:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Ball Collision",
+            ["Callback"] = function(p1_33, p2_33, p3_33, p4_33, a_33, b_33, c_33, ...)
+                Workspace.TPSSystem.TPS.CanCollide = p1_33;
+            end
+        });
+        Ball_Mods:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Spectate Ball",
+            ["Callback"] = function(p1_34, a_34, b_34, c_34, ...)
+                if p1_34 then
+
+                end;
+                error("runtime error: Failed to convert from 'table' into 'Ref'");
+            end
+        });
+        Ball_Mods:CreateSection("Ball Size");
+        Ball_Mods:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Change Ball Size",
+            ["Callback"] = function(p1_35, p2_35, p3_35, p4_35, a_35, b_35, c_35, ...)
+                if p1_35 then
+                    workspace:WaitForChild("TPSSystem"):WaitForChild("TPS").Size = Vector3_New(10, 10, 10);
+                end;
+            end
+        });
+        Ball_Mods:CreateSlider({
+            ["Name"] = "Ball Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 2.6,
+            ["Increment"] = 0.1,
+            ["Range"] = {
+                1,
+                20
+            },
+            ["Callback"] = function(p1_36, p2_36, p3_36, a_36, b_36, c_36, ...)
+                workspace:WaitForChild("TPSSystem"):WaitForChild("TPS").Size = Vector3_New(p1_36, p1_36, p1_36);
+            end
+        });
+        Ball_Mods:CreateSection("Ball Modifications");
+        Ball_Mods:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Ball Collision",
+            ["Callback"] = function(p1_37, p2_37, p3_37, p4_37, a_37, b_37, c_37, ...)
+                Workspace.TPSSystem.TPS.CanCollide = p1_37;
+            end
+        });
+        Ball_Mods:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Spectate Ball",
+            ["Callback"] = function(p1_38, p2_38, a_38, b_38, c_38, ...)
+                if not p1_38 then
+                else
+
+                end;
+                error("runtime error: Failed to convert from 'table' into 'Ref'");
+            end
+        });
+        Ball_Mods:CreateSection("Ball Size");
+        Ball_Mods:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Change Ball Size",
+            ["Callback"] = function(p1_39, a_39, b_39, c_39, ...)
+                if not p1_39 then
+                else
+                    workspace:WaitForChild("TPSSystem"):WaitForChild("TPS").Size = Vector3_New(10, 10, 10);
+                end;
+            end
+        });
+        Ball_Mods:CreateSlider({
+            ["Name"] = "Ball Size",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 2.6,
+            ["Increment"] = 0.1,
+            ["Range"] = {
+                1,
+                20
+            },
+            ["Callback"] = function(p1_40, p2_40, p3_40, p4_40, a_40, b_40, c_40, ...)
+                workspace:WaitForChild("TPSSystem"):WaitForChild("TPS").Size = Vector3_New(p1_40, p1_40, p1_40);
+            end
+        });
+        Ball_Mods:CreateSection("Ball fix");
+        Ball_Mods:CreateButton({
+            ["Name"] = "Fix Ball Cancollide",
+            ["Callback"] = function(a_41, b_41, c_41, ...)
+                workspace:WaitForChild("TPSSystem"):WaitForChild("TPS").CollisionGroup = "ball";
+                Rayfield:Notify({
+                    ["Duration"] = 3,
+                    ["Title"] = "Ball Fixed",
+                    ["Content"] = "Ball collision group set to 'ball'"
+                });
+            end
+        });
+        Ball_Mods:CreateButton({
+            ["Name"] = "Remove Textures",
+            ["Callback"] = function(p1_42, p2_42, p3_42, p4_42, a_42, b_42, c_42, ...)
+                local TPS_4 = Workspace.TPSSystem.TPS;
+                for for_key_9, for_val_9 in pairs(TPS_4:GetChildren()) do -- for loop 10 start
+                    if not for_key_9 then
+                    else
+                        Decal = for_val_9:IsA("Decal");
+                    end;
+                    if Decal then
+                        if Decal then
+                            for_val_9:Destroy();
+                        end;
+                    end;
+                end -- for loop 10 end;
+                for for_key_10, for_val_10 in pairs(TPS_4:GetChildren()) do -- for loop 11 start
+                    if for_key_10 then
+
+                    end;
+                    if not for_val_10:IsA("Fire") then
+                    else
+                        for_val_10.Heat = 1;
+                    end;
+                    for_val_10.Size = 5;
+                end -- for loop 11 end;
+                TPS_4.Massless = true;
+                TPS_4.CustomPhysicalProperties = false;
+                Rayfield:Notify({
+                    ["Duration"] = 3,
+                    ["Title"] = "Textures Removed",
+                    ["Content"] = "Ball textures have been removed successfully"
+                });
+            end
+        });
+        Player:CreateSection("Movement");
+        CharacterAdded:Connect(function(p1_43, p2_43, a_43, b_43, c_43, ...)
+            p1_43:WaitForChild("Humanoid");
+            p1_43:WaitForChild("HumanoidRootPart");
+        end);
+        if not LocalPlayer_Character then
+        else
+            LocalPlayer_Character:WaitForChild("Humanoid");
+        end;
+        LocalPlayer_Character:WaitForChild("HumanoidRootPart");
+        local Heartbeat = game:GetService("RunService").Heartbeat;
+        Connected_8 = Heartbeat:Connect(function(p1_44, p2_44, a_44, b_44, c_44, ...) end);
+        Player:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Enable Speed",
+            ["Callback"] = function(p1_44, a_44, b_44, c_44, ...) end
+        });
+        Player:CreateSlider({
+            ["Name"] = "Speed",
+            ["Suffix"] = "studs",
+            ["CurrentValue"] = 23,
+            ["Increment"] = 1,
+            ["Range"] = {
+                23,
+                100
+            },
+            ["Callback"] = function(p1_44, p2_44, a_44, b_44, c_44, ...) end
+        });
+        game:GetService("RunService");
+        Connected_9 = Heartbeat:Connect(function(p1_44, p2_44, p3_44, p4_44, a_44, b_44, c_44, ...) end);
+        Player:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Enable Power Jump",
+            ["Callback"] = function(p1_44, p2_44, p3_44, p4_44, p5_44, a_44, b_44, c_44, ...) end
+        });
+        Player:CreateSlider({
+            ["Name"] = "PowerJump Strength",
+            ["Suffix"] = "power",
+            ["CurrentValue"] = 50,
+            ["Increment"] = 1,
+            ["Range"] = {
+                50,
+                200
+            },
+            ["Callback"] = function(p1_44, p2_44, p3_44, a_44, b_44, c_44, ...) end
+        });
+        Misc:CreateSection("Miscellaneous Features");
+        Misc:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Faster Cooldown",
+            ["Callback"] = function(p1_44, p2_44, p3_44, p4_44, p5_44, p6_44, a_44, b_44, c_44, ...)
+                if not p1_44 then
+                else
+                    game:GetService("Players");
+                end;
+                Start.GamePassMenu.Items.Cooldown.Tick.Visible = true;
+                game:GetService("Players");
+                Start.GamePassMenu.Items.Cooldown.Cooldown.Style = "RobloxRoundButton";
+                game:GetService("Players");
+                Start.PowerShot.PowerValue.Value = 30;
+            end
+        });
+        Misc:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Blue Flame",
+            ["Callback"] = function(p1_45, p2_45, p3_45, a_45, b_45, c_45, ...)
+                if p1_45 then
+                    game:GetService("Players");
+                end;
+                Start.GamePassMenu.Items.BlueFlame.Tick.Visible = true;
+                game:GetService("Players");
+                Start.GamePassMenu.Items.BlueFlame.BlueFlame.Style = "RobloxRoundButton";
+                game:GetService("Players");
+                Start.PowerShot.Image = "rbxassetid://5366457711";
+                game:GetService("Players");
+                LocalPlayer_Backpack.FValue.Value = 2;
+            end
+        });
+        Misc:CreateSlider({
+            ["Name"] = "Change FOV",
+            ["Suffix"] = "FOV",
+            ["CurrentValue"] = 90,
+            ["Increment"] = 0.1,
+            ["Range"] = {
+                60,
+                120
+            },
+            ["Callback"] = function(p1_46, a_46, b_46, c_46, ...)
+                error("runtime error: Failed to convert from 'table' into 'Float32'");
+            end
+        });
+        Misc:CreateSection("Fake Ping");
+        Misc:CreateToggle({
+            ["CurrentValue"] = false,
+            ["Name"] = "Fake Ping (35-50)",
+            ["Callback"] = function(p1_47, p2_47, p3_47, p4_47, p5_47, a_47, b_47, c_47, ...)
+                if p1_47 then
+
+                end;
+                for for_key_11, for_val_11 in ipairs(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("PerformanceStats"):GetChildren()) do -- for loop 12 start
+                    if not for_key_11 then
+                    else
+                        local _ = ((for_val_11.StatsMiniTextPanelClass.TitleLabel.Text == "Ping"));
+                        -- false
+                    end;
+                end -- for loop 12 end;
+                warn("Ping label not found!");
+            end
+        });
+        Misc:CreateButton({
+            ["Name"] = "Unlock Celebrations",
+            ["Callback"] = function(p1_48, p2_48, p3_48, p4_48, p5_48, a_48, b_48, c_48, ...)
+                Rayfield:Notify({
+                    ["Duration"] = 3,
+                    ["Title"] = "Celebrations Unlocked",
+                    ["Content"] = "All celebration packs have been unlocked!"
+                });
+            end
+        });
+        Window:OnUnload(function(p1_49, p2_49, a_49, b_49, c_49, ...)
+            if Connected then
+                Connected:Disconnect();
+            end;
+            if not Connected_3 then
+            else
+                Connected_3:Disconnect();
+            end;
+            if Connected_4 then
+                Connected_4:Disconnect();
+            end;
+            if Connected_6 then
+                Connected_6:Disconnect();
+            end;
+            if Connected_7 then
+                Connected_7:Disconnect();
+            end;
+            if not Connected_8 then
+            else
+                Connected_8:Disconnect();
+            end;
+            if not Connected_9 then
+            else
+                Connected_9:Disconnect();
+            end;
+            if Connected_2 then
+                Connected_2:Disconnect();
+            end;
+            if Connected_5 then
+                Connected_5:Disconnect();
+            end;
+            if PlayerReachIndicator then
+                PlayerReachIndicator:Destroy();
+            end;
+            if not BallToBodyReachIndicator then
+            else
+                BallToBodyReachIndicator:Destroy();
+            end;
+            if not HeadToBallReachIndicator then
+            else
+                HeadToBallReachIndicator:Destroy();
+            end;
+            for for_key_12, for_val_12 in ipairs(workspace:GetChildren()) do -- for loop 13 start
+                if for_key_12 then
+                    local _ = ((for_val_12.Name == "supskidder1"));
+                    -- false
+                end;
+            end -- for loop 13 end;
+            for for_key_13, for_val_13 in ipairs(workspace:GetChildren()) do -- for loop 14 start
+                if not for_key_13 then
+                else
+
+                end;
+                if for_val_13:IsA("Part") then
+                    local _ = ((for_val_13.Material == Material.Neon));
+                    -- false
+                end;
+            end -- for loop 14 end;
+        end);
+    end
+});
+game:GetService("Players");
+_G.ScriptUsers = {};
+_G.UserSentOnline = {};
+if not fenv.syn then
+else
+    Request = fenv.syn.request;
+    if Request then
+        local _ = not Request;
+    end;
+end;
+local LocalPlayer_UserId = LocalPlayer.UserId;
+local Array = {};
+if not LocalPlayer_UserId then
+else
+
+end;
+Request({
+    ["Body"] = game:GetService("HttpService"):JSONEncode({
+        ["username"] = "Script Status",
+        ["content"] = ("🟢 **Online:** " .. (LocalPlayer.Name .. " | Active Users: 1"))
+    }),
+    ["Url"] = "https://discord.com/api/webhooks/1436186616845570213/4yI-prtlG0onzEbYvX_o-hNxEXt06G1k7bwP8lmV88chsEUgdYJCe1MylldR_PPoL-yF",
+    ["Method"] = "POST",
+    ["Headers"] = {
+        ["Content-Type"] = "application/json"
+    }
+});
+game:BindToClose(function(p1_9, p2_9, p3_9, a_9, b_9, c_9, ...)
+    local Dictionary = {
+        [LocalPlayer_UserId] = true
+    };
+end);
+LocalPlayer.AncestryChanged:Connect(function(p1_10, p2_10, p3_10, p4_10, p5_10, p6_10, a_10, b_10, c_10, ...)
+    local _ = not p2_10;
+end);
