@@ -1,0 +1,131 @@
+‏local turret = script.Parent
+‏local Players = game:GetService("Players")
+‏local RunService = game:GetService("RunService")
+‏local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+‏local turretEvent = Instance.new("RemoteEvent")
+‏turretEvent.Name = "TurretToggleEvent"
+‏turretEvent.Parent = ReplicatedStorage
+
+‏local turretEnabled = true
+‏turretEvent.OnServerEvent:Connect(function(player, state)
+‏	turretEnabled = state
+‏end)
+
+‏local RANGE = 150
+‏local PROJECTILE_SPEED = 220
+‏local SMOOTHNESS = 0.2
+‏local FOV_DOT = 0.45
+‏local FIRE_COOLDOWN = 0.12
+‏local DAMAGE = 15
+‏local SPREAD = 0.02
+
+‏local lastShot = 0
+
+‏local function getPos()
+‏	return turret.Position
+‏end
+
+‏local function getNearestTarget()
+‏	local nearest, shortest = nil, RANGE
+‏	for _, plr in pairs(Players:GetPlayers()) do
+‏		local char = plr.Character
+‏		if char and char:FindFirstChild("HumanoidRootPart") and char:FindFirstChild("Humanoid") then
+‏			local dist = (char.HumanoidRootPart.Position - getPos()).Magnitude
+‏			if dist < shortest and char.Humanoid.Health > 0 then
+‏				shortest = dist
+‏				nearest = char
+‏			end
+‏		end
+‏	end
+‏	return nearest
+‏end
+
+‏local function predictPosition(hrp)
+‏	local dist = (hrp.Position - getPos()).Magnitude
+‏	local time = dist / PROJECTILE_SPEED
+‏	return hrp.Position + (hrp.Velocity * time)
+‏end
+
+‏local function inFOV(targetPos)
+‏	local dir = (targetPos - getPos()).Unit
+‏	return turret.CFrame.LookVector:Dot(dir) > FOV_DOT
+‏end
+
+‏local function canSee(targetPos)
+‏	local params = RaycastParams.new()
+‏	params.FilterDescendantsInstances = {turret}
+‏	params.FilterType = Enum.RaycastFilterType.Blacklist
+
+‏	local result = workspace:Raycast(getPos(), (targetPos - getPos()), params)
+‏	if result and result.Instance then
+‏		return result.Instance.Parent:FindFirstChild("Humanoid") ~= nil
+‏	end
+‏	return false
+‏end
+
+‏local function smoothLook(targetPos)
+‏	local goal = CFrame.lookAt(getPos(), targetPos)
+‏	turret.CFrame = turret.CFrame:Lerp(goal, SMOOTHNESS)
+‏end
+
+‏local function shoot(targetPos)
+‏	if tick() - lastShot < FIRE_COOLDOWN then return end
+‏	lastShot = tick()
+
+‏	local origin = getPos()
+‏	local dir = (targetPos - origin).Unit
+
+‏	dir = (dir + Vector3.new(
+‏		math.random(-SPREAD, SPREAD),
+‏		math.random(-SPREAD, SPREAD),
+‏		math.random(-SPREAD, SPREAD)
+‏	)).Unit
+
+‏	local params = RaycastParams.new()
+‏	params.FilterDescendantsInstances = {turret}
+‏	params.FilterType = Enum.RaycastFilterType.Blacklist
+
+‏	local result = workspace:Raycast(origin, dir * RANGE, params)
+
+‏	if result and result.Instance then
+‏		local hum = result.Instance.Parent:FindFirstChild("Humanoid")
+‏		if hum then
+‏			hum:TakeDamage(DAMAGE)
+‏		end
+‏	end
+‏end
+
+‏RunService.Heartbeat:Connect(function()
+‏	if not turretEnabled then return end
+
+‏	local target = getNearestTarget()
+‏	if not target then return end
+
+‏	local hrp = target:FindFirstChild("HumanoidRootPart")
+‏	if not hrp then return end
+
+‏	local predicted = predictPosition(hrp)
+
+‏	if inFOV(predicted) and canSee(predicted) then
+‏		smoothLook(predicted)
+‏		shoot(predicted)
+‏	end
+‏end)
+
+‏local button = script.Parent
+‏local turretEvent = game.ReplicatedStorage:WaitForChild("TurretToggleEvent")
+
+‏local enabled = true
+
+‏local function update()
+‏	button.Text = "Turret AI : " .. (enabled and "ON" or "OFF")
+‏end
+
+‏update()
+
+‏button.MouseButton1Click:Connect(function()
+‏	enabled = not enabled
+‏	update()
+‏	turretEvent:FireServer(enabled)
+‏end)
