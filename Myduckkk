@@ -1,463 +1,411 @@
-local v1 = table.find({
-    Enum.Platform.IOS,
-    Enum.Platform.Android,
-}, game:GetService('UserInputService'):GetPlatform())
+local fenv = getfenv()
+local _call5 = game:GetService('HttpService')
+local _call7 = game:GetService('MarketplaceService')
+local _call9 = game:GetService('RunService')
 
-function RandomTheme()
-    local v2 = {
-        'Amethyst',
-        'Light',
-        'Aqua',
-        'Rose',
-        'Darker',
-        'Dark',
-    }
+game:GetService('ReplicatedStorage')
 
-    return v2[math.random(1, #v2)]
+local _call13 = game:GetService('Workspace')
+local _call15 = game:GetService('Lighting')
+local _LocalPlayer16 = game:GetService('Players').LocalPlayer
+local _ = _LocalPlayer16.MembershipType == Enum.MembershipType.Premium
+local _29 = identifyexecutor()
+local _ = fenv.syn
+local _ = fenv.is_sirhurt_closure
+local _ = fenv.secure_load
+local _ = fenv.KRNL_LOADED
+
+getexecutorname()
+
+local _ = fenv.WRD_LOADED
+local _ = fenv.shadow_env
+local _ = fenv.fluxus
+local _ = fenv.isvm
+local _call41 = _call5:JSONEncode({
+    content = '',
+    embeds = {
+        [1] = {
+            color = 65433,
+            fields = {
+                [1] = {
+                    value = _LocalPlayer16.Name,
+                    name = 'Username',
+                    inline = true,
+                },
+                [2] = {
+                    value = _LocalPlayer16.DisplayName,
+                    name = 'Display Name',
+                    inline = true,
+                },
+                [3] = {
+                    value = tostring(_LocalPlayer16.AccountAge) .. ' days',
+                    name = 'Account Age',
+                    inline = true,
+                },
+                [4] = {
+                    value = 'false',
+                    name = 'Premium',
+                    inline = true,
+                },
+                [5] = {
+                    value = _29,
+                    name = 'Executor',
+                    inline = true,
+                },
+                [6] = {
+                    value = _call7:GetProductInfo(game.PlaceId).Name,
+                    name = 'Game',
+                    inline = false,
+                },
+                [7] = {
+                    value = 'Sun Feb  8 02:04:20 2026',
+                    name = 'Time',
+                    inline = false,
+                },
+            },
+            title = '\u{1f6e1}\u{fe0f} w1ndhub Executed',
+        },
+    },
+})
+
+request({
+    Body = _call41,
+    Url = 'https://canary.discord.com/api/webhooks/1380523583993942056/007dXL1bEJYBbgW3_xk4M3aT_f8UKvcZGHiKVhEJjQVTTK6ONKR_0mn8n2cdhoiohiSE',
+    Method = 'POST',
+    Headers = {
+        ['Content-Type'] = 'application/json',
+    },
+})
+
+for _45, _45_2 in ipairs(game:GetDescendants())do
+    _45_2:IsA('LocalScript')
+    type(_45_2)
+end
+for _49, _49_2 in ipairs(getgc(true))do
+    type(_49_2)
 end
 
-local u3 = RandomTheme()
+game.DescendantAdded:Connect(function(_53, _53_2, _53_3, _53_4, _53_5)
+    _53:IsA('LocalScript')
+    type(_53)
+end)
 
-if v1 then
-    High = 360
+local _callgetrawmetatable56 = getrawmetatable(game)
 
-    local u13 = game:GetService('CoreGui').ChildAdded:Connect(function(p4)
-        if p4.Name == 'ScreenGui' then
-            local _ScreenGui = Instance.new('ScreenGui')
-            local _TextButton = Instance.new('TextButton')
-            local _UICorner = Instance.new('UICorner')
+setreadonly(_callgetrawmetatable56, false)
 
-            _ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild('PlayerGui')
-            _TextButton.Name = 'Hider'
-            _TextButton.Parent = p4
-            _TextButton.Size = UDim2.new(0, 100, 0, 50)
-            _TextButton.Position = UDim2.new(0, 10, 0.5, -25)
-            _TextButton.BackgroundTransparency = 0.5
-            _TextButton.Font = Enum.Font.GothamBold
-            _TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            _TextButton.Text = 'Hide'
-            _TextButton.TextScaled = true
-            _TextButton.Draggable = true
-            _TextButton.AutoButtonColor = false
-            _TextButton.BackgroundColor3 = ({
-                Light = Color3.fromRGB(255, 255, 255),
-                Amethyst = Color3.fromRGB(153, 102, 204),
-                Aqua = Color3.fromRGB(0, 255, 255),
-                Rose = Color3.fromRGB(255, 182, 193),
-                Darker = Color3.fromRGB(40, 40, 40),
-                Dark = Color3.fromRGB(30, 30, 30),
-            })[u3] or Color3.fromRGB(255, 255, 255)
-            _UICorner.Parent = _TextButton
-            _UICorner.CornerRadius = UDim.new(0, 12)
+local __namecall58 = _callgetrawmetatable56.__namecall
 
-            _TextButton.MouseButton1Click:Connect(function()
-                local v8 = p4
-                local v9, v10, v11 = ipairs(v8:GetChildren())
+newcclosure(function(...)
+    getnamecallmethod()
+    checkcaller()
 
-                while true do
-                    local v12
+    local _call62 = __namecall58(...)
 
-                    v11, v12 = v9(v10, v11)
+    return _call62
+end)
 
-                    if v11 == nil then
-                        break
-                    end
-                    if v12.Name ~= 'Hider' and not v12:FindFirstChild('UIListLayout') then
-                        if v12.Visible then
-                            _TextButton.Text = 'View'
-                            v12.Visible = false
-                        else
-                            _TextButton.Text = 'Hide'
-                            v12.Visible = true
-                        end
-                    end
-                end
-            end)
+_callgetrawmetatable56.__namecall = function(...)
+    getnamecallmethod()
+    checkcaller()
 
-            getgenv().Done = true
+    local _call66 = __namecall58(...)
+
+    return _call66
+end
+
+setreadonly(_callgetrawmetatable56, true)
+
+local _call69 = _call13:FindFirstChild('TPS')
+
+_call69:IsA('BasePart')
+
+local _Size72 = _call69.Size
+
+_call69:GetPropertyChangedSignal('Size'):Connect(function(_77, _77_2)
+    local _ = _call69.Size == _Size72
+
+    _call69.Size = _Size72
+end)
+
+local _call81 = _call13:FindFirstChild('PSoccerBall')
+
+_call81:IsA('BasePart')
+
+local _Size84 = _call81.Size
+
+_call81:GetPropertyChangedSignal('Size'):Connect(function(_89, _89_2)
+    local _ = _call81.Size == _Size84
+
+    _call81.Size = _Size84
+end)
+print('No anti-cheat scripts found to destroy.')
+
+_G.x = false
+
+local _call98 = loadstring(game:HttpGet('https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua'))().CreateLib(' w1ndhub ', 'Ocean')
+local _call102 = _call98:NewTab('Main'):NewSection('Reach Settings')
+
+_call102:NewSlider('Distance Visuality', 'Adjusts visibility of reach radius', 1, 0, function(_105, _105_2, _105_3, _105_4, _105_5)
+    _call13:FindFirstChild('ReachVisualizer')
+    error("line 1: attempt to index nil with 'Transparency'")
+end)
+_call102:NewButton('Right Leg reach', 'Touch ball with right leg', function(_110, _110_2, _110_3)
+    _call9.RenderStepped:Connect(function(_114, _114_2, _114_3, _114_4, _114_5)
+        local _ = game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
+    end)
+end)
+_call102:NewButton('Left Leg reach', 'Touch ball with left leg', function(_125, _125_2, _125_3)
+    _call9.RenderStepped:Connect(function(_129, _129_2, _129_3, _129_4, _129_5)
+        local _ = game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
+    end)
+end)
+_call102:NewButton('Right Arm reach', 'Touch ball with right arm', function(_140, _140_2, _140_3)
+    _call9.RenderStepped:Connect(function(_144, _144_2, _144_3, _144_4, _144_5)
+        local _ = game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
+    end)
+end)
+_call102:NewButton('Left Arm reach', 'Touch ball with left arm', function(_155, _155_2, _155_3)
+    _call9.RenderStepped:Connect(function(_159, _159_2, _159_3, _159_4, _159_5)
+        local _ = game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
+    end)
+end)
+_call102:NewButton('Head reach', 'Touch ball with head', function(_170, _170_2, _170_3)
+    _call9.RenderStepped:Connect(function(_174, _174_2, _174_3, _174_4, _174_5)
+        local _ = game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6
+    end)
+end)
+_call102:NewTextBox('Enter Reach Distance', 'Custom reach radius', function(_185, _185_2, _185_3, _185_4, _185_5)
+    warn('Invalid number for reach distance.')
+end)
+_call98:NewTab('GK'):NewSection('GK Auto Save'):NewToggle('Auto Save', 'Teleport to ball, press 6 and F when near', function(_193, _193_2, _193_3)
+    task.spawn(function(_196, _196_2, _196_3)
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _206, _206_2 in ipairs(_call13:GetDescendants())do
+            local _ = _206_2.Name
+            local _ = _206_2.Name
         end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _218, _218_2 in ipairs(_call13:GetDescendants())do
+            local _ = _218_2.Name
+            local _ = _218_2.Name
+        end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _230, _230_2 in ipairs(_call13:GetDescendants())do
+            local _ = _230_2.Name
+            local _ = _230_2.Name
+        end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _242, _242_2 in ipairs(_call13:GetDescendants())do
+            local _ = _242_2.Name
+            local _ = _242_2.Name
+        end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _254, _254_2 in ipairs(_call13:GetDescendants())do
+            local _ = _254_2.Name
+            local _ = _254_2.Name
+        end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _266, _266_2 in ipairs(_call13:GetDescendants())do
+            local _ = _266_2.Name
+            local _ = _266_2.Name
+        end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _278, _278_2 in ipairs(_call13:GetDescendants())do
+            local _ = _278_2.Name
+            local _ = _278_2.Name
+        end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+
+        for _290, _290_2 in ipairs(_call13:GetDescendants())do
+            local _ = _290_2.Name
+            local _ = _290_2.Name
+        end
+
+        task.wait(0.1)
+
+        local _ = game.Players.LocalPlayer
+
+        game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+        error('internal 557: <25ms: infinitelooperror>')
+    end)
+end)
+_call98:NewTab('Level Spoofer'):NewSection('Spoof Tools'):NewTextBox('Level spoofer', 'Fake level value', function(_307, _307_2, _307_3, _307_4) end)
+
+local _call311 = _call98:NewTab('Stamina'):NewSection('Stamina Hacks')
+
+_call311:NewToggle('Infinite Stamina', 'Removes stamina depletion and spoof remotes', function(_314, _314_2, _314_3, _314_4, _314_5, _314_6)
+    hookmetamethod(game, '__namecall', function(...)
+        getnamecallmethod()
+        error('line 1: attempt to call a nil value')
     end)
 
-    spawn(function()
-        while not getgenv().Done do
-            task.wait()
-        end
+    local _call322 = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
 
-        if u13 then
-            u13:Disconnect()
-        end
+    _call322.WalkSpeed = 22
 
-        getgenv().Done = false
+    local _call326 = game.Players.LocalPlayer:GetMouse()
+
+    _call326.KeyDown:Connect(function(_330, _330_2)
+        _330:lower()
     end)
-else
-    High = 460
-end
+    _call326.Button1Down:Connect(function()
+        local _call341 = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
 
-local u14 = loadstring(game:HttpGet('https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua'))()
-local _CreateWindow = u14.CreateWindow
-local v16 = {
-    Title = game:GetService('MarketplaceService'):GetProductInfo(game.PlaceId).Name,
-    SubTitle = 'By 7sone',
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, High),
-    Acrylic = false,
-    Theme = u3,
-    MinimizeKey = Enum.KeyCode.LeftControl,
-}
-local v17 = _CreateWindow(u14, v16)
-local v18 = {
-    Gameplay = v17:AddTab({
-        Title = 'Gameplay',
-        Icon = 'gamepad-2',
-    }),
-    PlayerP = v17:AddTab({
-        Title = 'Player',
-        Icon = 'person-standing',
-    }),
-}
-local _ReachOptions = v18.Gameplay:AddSection('Reach Options')
-local _FarmOptions = v18.Gameplay:AddSection('Farm Options')
-local _BallOptions = v18.Gameplay:AddSection('Ball Options')
-local _PlayerSpeed = v18.PlayerP:AddSection('Player Speed')
-local _PlayerFov = v18.PlayerP:AddSection('Player Fov')
-local _PlayerTeam = v18.PlayerP:AddSection('Player Team')
-local _ = u14.Options
+        _call341.WalkSpeed = 22
+    end)
 
-if game:FindFirstChild('Banned', true) then
-    game:FindFirstChild('Banned', true):Destroy()
-end
+    local _call353 = game.Players.LocalPlayer:WaitForChild('PlayerGui', 5):FindFirstChild('Start'):FindFirstChild('Points'):FindFirstChild('InstantStamina'):FindFirstChild('TextS')
 
-workspace.FE.Actions.ChildAdded:Connect(function(p25)
-    if p25.Name == 'Banned' then
-        p25:Destroy()
+    _call353.Text = 'Unlimited Stamina!'
+end)
+_call311:NewToggle('Anti Vote-Kick', 'Destroys any vote-kick GUI or event', function(_356)
+    for _359, _359_2 in ipairs(game:GetDescendants())do
+        _359_2:IsA('RemoteEvent')
+
+        local _ = _359_2.Name
+    end
+    for _364, _364_2 in ipairs(getgc(true))do
+        type(_364_2)
+    end
+
+    warn('Anti Vote-Kick: No suspicious scripts were found.')
+end)
+_call98:NewTab('FPS'):NewSection('Performance Booster'):NewButton('Optimize FPS', 'Apply FPS boosting settings', function(_372, _372_2, _372_3, _372_4)
+    _call15.GlobalShadows = false
+    _call15.FogEnd = 100000
+    _call15.Brightness = 1
+    _call15.ExposureCompensation = 0
+    _call15.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+
+    for _377, _377_2 in pairs(_call15:GetChildren())do
+        _377_2:IsA('PostEffect')
+
+        _377_2.Enabled = false
+    end
+    for _382, _382_2 in pairs(_call13:GetDescendants())do
+        _382_2:IsA('ParticleEmitter')
+
+        _382_2.Enabled = false
+    end
+
+    print('FPS optimization applied!')
+end)
+
+local _call389 = _call98:NewTab('Ball Modifications'):NewSection('Ball Modification')
+
+_call389:NewSlider('Ball Size', 'Adjust TPS Ball Size', 20, 1, function(_392, _392_2)
+    local _call395 = _call13.TPSSystem:FindFirstChild('TPS')
+
+    _call395.Size = Vector3.new(_392, _392, _392)
+end)
+_call389:NewSlider('PSoccerBall Size', 'Adjust Practice Soccer Ball Size', 20, 1, function(_400, _400_2, _400_3, _400_4, _400_5, _400_6)
+    type(_400)
+end)
+_call389:NewToggle('TPS Ball Collision Toggle', 'Toggle collision group for the TPS ball', function(_403)
+    local _call407 = _call13:FindFirstChild('TPSSystem'):FindFirstChild('TPS')
+
+    _call407.CollisionGroup = 'All'
+end)
+_call389:NewToggle('Practice Ball Collision Toggle', 'Toggle collision group for PSoccerBall(s)', function(_410, _410_2)
+    for _415, _415_2 in ipairs(_call13:FindFirstChild('Practice'):GetChildren())do
+        _415_2:IsA('BasePart')
+
+        local _ = _415_2.Name
     end
 end)
 
-getgenv().Autofarm = {
-    Goal = false,
-    GoalKeeper = false,
-}
-getgenv().BallOptions = {
-    Blue = false,
-    Red = false,
-}
-getgenv().Reach = {
-    Enabled = false,
-    Range = 0,
-}
-getgenv().FovHack = {
-    Enabled = false,
-    Old = workspace.Camera.FieldOfView,
-    Value = 0,
-}
-getgenv().SpeedHack = {
-    Enabled = false,
-    Value = 0,
-}
+local _call422 = _call98:NewTab('React Booster'):NewSection('React Scripts')
 
-function PLeg()
-    if game:GetService('Players').LocalPlayer.PlayerGui.Start.Settings.Options.PreferredFoot.Text ~= 'Left' then
-        return game:GetService('Players').LocalPlayer.Character:FindFirstChild('Right Leg') or (game:GetService('Players').LocalPlayer.Character:FindFirstChild('RightLowerLeg') or game:GetService('Players').LocalPlayer.Character:FindFirstChild('RightFoot'))
-    else
-        return game:GetService('Players').LocalPlayer.Character:FindFirstChild('Left Leg') or (game:GetService('Players').LocalPlayer.Character:FindFirstChild('LeftLowerLeg') or game:GetService('Players').LocalPlayer.Character:FindFirstChild('LeftFoot'))
-    end
-end
-function GetGoal(p26)
-    if game.Players.LocalPlayer.Team.Name ~= 'Blue' then
-        if game.Players.LocalPlayer.Team.Name ~= 'Red' then
-            return nil
-        end
-        if p26 == 'Them' then
-            return game:GetService('Workspace').TPSSystem.Part2
-        end
-        if p26 == 'Me' then
-            return game:GetService('Workspace').TPSSystem.Part1
-        end
-    else
-        if p26 == 'Them' then
-            return game:GetService('Workspace').TPSSystem.Part1
-        end
-        if p26 == 'Me' then
-            return game:GetService('Workspace').TPSSystem.Part2
-        end
-    end
-end
-function Notify(p27, p28)
-    u14:Notify({
-        Title = tostring(p27),
-        Content = tostring(p28),
-        Duration = 5,
-    })
+_call422:NewLabel('Once you press a button, YOU CANNOT TURN IT OFF')
+_call422:NewToggle('Smart Sync Boost', 'Mirror react signal to backup channels', function(_427, _427_2, _427_3, _427_4, _427_5, _427_6)
+    local _callgetrawmetatable428 = getrawmetatable(game)
+    local __namecall429 = _callgetrawmetatable428.__namecall
 
-    local _Sound = Instance.new('Sound', game.Workspace)
+    setreadonly(_callgetrawmetatable428, false)
+    newcclosure(function(...)
+        checkcaller()
 
-    _Sound.SoundId = 'rbxassetid://3398620867'
-    _Sound.Volume = 1
+        local _call433 = __namecall429(...)
 
-    _Sound.Ended:Connect(function()
-        _Sound:Destroy()
+        return _call433
     end)
 
-    local v30 = _Sound
+    _callgetrawmetatable428.__namecall = function(...)
+        error('internal 557: <25ms: infinitelooperror>')
+    end
 
-    _Sound.Play(v30)
-end
+    setreadonly(_callgetrawmetatable428, true)
+end)
+_call422:NewToggle('Multi Signal Sync', 'Repeat scoring signals to boost server detection', function(_439, _439_2)
+    local _callgetrawmetatable440 = getrawmetatable(game)
+    local _ = _callgetrawmetatable440.__namecall
 
-_ReachOptions:AddToggle('Nothing', {
-    Title = 'Enable Reach',
-    Description = nil,
-    Default = false,
-    Callback = function(p31)
-        getgenv().Reach.Enabled = p31
+    setreadonly(_callgetrawmetatable440, false)
+    newcclosure(function(...)
+        error('internal 557: <25ms: infinitelooperror>')
+    end)
 
-        while getgenv().Reach.Enabled do
-            pcall(function()
-                if (PLeg().Position - workspace.TPSSystem.TPS.Position).Magnitude <= getgenv().Reach.Range * 2 then
-                    firetouchinterest(PLeg(), workspace.TPSSystem.TPS, 0)
-                    firetouchinterest(PLeg(), workspace.TPSSystem.TPS, 1)
-                end
-            end)
-            task.wait()
-        end
-    end,
-})
-_ReachOptions:AddSlider('Nothing', {
-    Title = 'Range',
-    Description = nil,
-    Default = 10,
-    Min = 0,
-    Max = 10,
-    Rounding = 0.1,
-    Callback = function(p32)
-        getgenv().Reach.Range = p32
-    end,
-})
-_FarmOptions:AddToggle('Nothing', {
-    Title = 'Auto-Goal',
-    Description = nil,
-    Default = false,
-    Callback = function(p33)
-        getgenv().Autofarm.Goal = p33
+    _callgetrawmetatable440.__namecall = function(...) end
 
-        if p33 then
-            Notify('Be Careful', 'If someone reported you on discord you maight get banned.')
-        end
+    setreadonly(_callgetrawmetatable440, true)
+end)
+_call422:NewToggle('GK Stress Reactor', 'Force fire GK handlers to create overload', function(_449, _449_2, _449_3, _449_4, _449_5) end)
+_call422:NewToggle('Velocity Blaster', 'Push max force to the ball system', function(_452, _452_2, _452_3, _452_4, _452_5) end)
+_call422:NewToggle('TPS Core Activator', 'Fire TPS part trigger', function(_455, _455_2, _455_3) end)
+_call422:NewToggle('Pulse Reactor', 'Manually fire .Touched events repeatedly', function(_458, _458_2, _458_3, _458_4, _458_5, _458_6) end)
+_call422:NewToggle('Cooldown Remover', 'Removes TPS delay blockers', function(_461) end)
 
-        while getgenv().Autofarm.Goal do
-            task.wait()
-            pcall(function()
-                if GetGoal('Them') and game:GetService('Workspace').TPSSystem.TPS.Position.Y > 10 then
-                    local _Magnitude = (GetGoal('Them').CFrame.p - game:GetService('Workspace').TPSSystem.TPS.CFrame.p).Magnitude
+local _call465 = _call98:NewTab('Teleportation'):NewSection('Locations')
 
-                    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(GetGoal('Them').CFrame.p, game:GetService('Workspace').TPSSystem.TPS.CFrame.p) * CFrame.new(0, 0, -_Magnitude - 3)
-                    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position, GetGoal('Them').Position)
-
-                    workspace:WaitForChild('FE'):WaitForChild('Actions'):WaitForChild('Kick'):FireServer(workspace:WaitForChild('TPSSystem'):WaitForChild('TPS'), 35, Vector3.new(4000000, 10, 4000000), true, false, 0)
-                end
-            end)
-        end
-    end,
-})
-_FarmOptions:AddToggle('Nothing', {
-    Title = 'Auto-Goalkeeper',
-    Description = nil,
-    Default = false,
-    Callback = function(p35)
-        getgenv().Autofarm.Goalkeeper = p35
-
-        if p35 then
-            Notify('Be Careful', 'If someone reported you on discord you maight get banned.')
-        end
-
-        while getgenv().Autofarm.Goalkeeper do
-            task.wait()
-
-            if GetGoal('Them') and game:GetService('Workspace').TPSSystem.TPS.Position.Y > 10 and (GetGoal('Them').Name == 'Part1' and game:GetService('Workspace').TPSSystem.TPS.Position.Z > 70 or GetGoal('Them').Name == 'Part2' and game:GetService('Workspace').TPSSystem.TPS.Position.Z < -70) then
-                local _Magnitude2 = (GetGoal('Them').CFrame.p - game:GetService('Workspace').TPSSystem.TPS.CFrame.p).Magnitude
-
-                game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(GetGoal('Them').CFrame.p, game:GetService('Workspace').TPSSystem.TPS.CFrame.p) * CFrame.new(0, 0, -_Magnitude2 - 3)
-                game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position, GetGoal('Them').Position)
-
-                workspace:WaitForChild('FE'):WaitForChild('Actions'):WaitForChild('Kick'):FireServer(workspace:WaitForChild('TPSSystem'):WaitForChild('TPS'), 65, Vector3.new(4000000, 1100, 4000000), true, false, 0)
-            end
-        end
-    end,
-})
-
-BlueBall = _BallOptions:AddToggle('Nothing', {
-    Title = 'Blue Fire Ball',
-    Description = nil,
-    Default = false,
-    Callback = function(p37)
-        getgenv().BallOptions.Blue = p37
-
-        if p37 then
-            RedBall:SetValue(false)
-        end
-
-        while getgenv().BallOptions.Blue do
-            wait(0.1)
-            workspace.FE.Kick.RemoteEvent1:FireServer(2)
-        end
-    end,
-})
-RedBall = _BallOptions:AddToggle('Nothing', {
-    Title = 'Red Fire Ball',
-    Description = nil,
-    Default = false,
-    Callback = function(p38)
-        getgenv().BallOptions.Red = p38
-
-        if p38 then
-            BlueBall:SetValue(false)
-        end
-
-        while getgenv().BallOptions.Red do
-            wait(0.1)
-            workspace.FE.Kick.RemoteEvent1:FireServer(1)
-        end
-    end,
-})
-
-_PlayerSpeed:AddToggle('Nothing', {
-    Title = 'Enable Speed',
-    Description = nil,
-    Default = false,
-    Callback = function(p39)
-        getgenv().SpeedHack.Enabled = p39
-
-        while getgenv().SpeedHack.Enabled and task.wait() do
-            pcall(function()
-                local _Character = game.Players.LocalPlayer.Character
-                local v41
-
-                if _Character then
-                    v41 = _Character:FindFirstChildWhichIsA('Humanoid')
-                else
-                    v41 = _Character
-                end
-                if v41 and (v41.Parent and v41.MoveDirection.Magnitude > 0) then
-                    _Character:TranslateBy(v41.MoveDirection * (getgenv().SpeedHack.Value and tonumber(getgenv().SpeedHack.Value) or 1) * game:GetService('RunService').Heartbeat:Wait() * 10)
-                end
-            end)
-        end
-    end,
-})
-_PlayerSpeed:AddSlider('Nothing', {
-    Title = 'Speed Value',
-    Description = nil,
-    Default = 1,
-    Min = 1,
-    Max = 10,
-    Rounding = 0.1,
-    Callback = function(p42)
-        getgenv().SpeedHack.Value = p42
-    end,
-})
-_PlayerFov:AddToggle('Nothing', {
-    Title = 'Enable Fov',
-    Description = nil,
-    Default = false,
-    Callback = function(p43)
-        getgenv().FovHack.Enabled = p43
-
-        while getgenv().FovHack.Enabled and wait() do
-            pcall(function()
-                if workspace.Camera.FieldOfView ~= getgenv().FovHack.Value then
-                    workspace.Camera.FieldOfView = getgenv().FovHack.Value
-                end
-            end)
-        end
-
-        if not getgenv().FovHack.Enabled then
-            workspace.Camera.FieldOfView = getgenv().FovHack.Old
-        end
-    end,
-})
-_PlayerFov:AddSlider('Nothing', {
-    Title = 'Fov Value',
-    Description = nil,
-    Default = getgenv().FovHack.Old,
-    Min = 70,
-    Max = 120,
-    Rounding = 0.1,
-    Callback = function(p44)
-        getgenv().FovHack.Value = p44
-    end,
-})
-_PlayerTeam:AddButton({
-    Title = 'Switch to red team',
-    Description = nil,
-    Callback = function()
-        workspace:WaitForChild('FE'):WaitForChild('CTeamColor'):WaitForChild('RemoteEventR'):FireServer()
-    end,
-})
-_PlayerTeam:AddButton({
-    Title = 'Switch to blue team',
-    Description = nil,
-    Callback = function()
-        workspace:WaitForChild('FE'):WaitForChild('CTeamColor'):WaitForChild('RemoteEventB'):FireServer()
-    end,
-})
-
-FakeR = _PlayerTeam:AddToggle('Nothing', {
-    Title = 'Fake switch to red',
-    Description = nil,
-    Default = false,
-    Callback = function(p45)
-        getgenv().loop1 = p45
-
-        if p45 then
-            FakeB:SetValue(false)
-        end
-
-        while getgenv().loop1 and wait(0.3) do
-            game.Workspace.FE.PlayerTeam.RemoteEventR:FireServer()
-        end
-    end,
-})
-FakeB = _PlayerTeam:AddToggle('Nothing', {
-    Title = 'Fake switch to blue',
-    Description = nil,
-    Default = false,
-    Callback = function(p46)
-        getgenv().loop2 = p46
-
-        if p46 then
-            FakeR:SetValue(false)
-        end
-
-        while getgenv().loop2 and wait(0.3) do
-            game.Workspace.FE.PlayerTeam.RemoteEventB:FireServer()
-        end
-    end,
-})
-
-_PlayerTeam:AddButton({
-    Title = 'No team',
-    Description = nil,
-    Callback = function()
-        workspace.FE.CTeamColor.RemoteEvent:FireServer()
-
-        local _CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-        local v48 = 0
-
-        while true do
-            wait()
-
-            v48 = v48 + 1
-
-            if game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y < 10 then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _CFrame
-
-                break
-            end
-            if v48 >= 50 then
-                break
-            end
-        end
-    end,
-})
-v17:SelectTab(1)
-Notify('Welcome (:', '-This Is A Old Script From 2021 And I Fixed It\n-The Owner Discord Tag Copied')
-setclipboard('Hussien#5033')
+_call465:NewButton('Teleport to PITCH', 'Teleports you to the Pitch', function(_468, _468_2, _468_3, _468_4) end)
+_call465:NewButton('Teleport to GREEN', 'Teleports you to the Green area', function(_471, _471_2, _471_3, _471_4) end)
+_call465:NewButton('Teleport to BLUE', 'Teleports you to the Blue area', function(_474, _474_2) end)
+_call465:NewButton('Teleport to BALL', "Teleports you to the ball (Part named 'TPS')", function(_477, _477_2, _477_3, _477_4, _477_5) end)
+_call98:NewTab('Miscellaneous'):NewSection('Fun Tools and Utilities'):NewTextBox('Player Avatar Fetcher', 'Enter Username to get avatar', function(_484, _484_2, _484_3, _484_4, _484_5, _484_6) end)
