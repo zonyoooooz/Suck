@@ -1,43 +1,50 @@
-local reachDistance = 50
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local ActivateBtn = Instance.new("TextButton")
 
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+ScreenGui.Parent = game.CoreGui
+MainFrame.Name = "Helixia_Lite"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainFrame.Position = UDim2.new(0.5, -100, 0.5, -50)
+MainFrame.Size = UDim2.new(0, 200, 0, 100)
+MainFrame.Active = true
+MainFrame.Draggable = true
 
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 200, 0, 150)
-frame.Position = UDim2.new(0.5, -100, 0.5, -75)
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-frame.Parent = screenGui
+Title.Parent = MainFrame
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Text = "Helixia Reach"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 
-local reachSlider = Instance.new("Slider")
-reachSlider.Min = 10
-reachSlider.Max = 100
-reachSlider.Size = UDim2.new(0, 180, 0, 30)
-reachSlider.Position = UDim2.new(0, 10, 0, 40)
-reachSlider.Parent = frame
-reachSlider.Value = reachDistance
+ActivateBtn.Parent = MainFrame
+ActivateBtn.Position = UDim2.new(0.1, 0, 0.45, 0)
+ActivateBtn.Size = UDim2.new(0.8, 0, 0.4, 0)
+ActivateBtn.Text = "ACTIVATE"
+ActivateBtn.BackgroundColor3 = Color3.fromRGB(0, 120, 0)
+ActivateBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 
-local reachLabel = Instance.new("TextLabel")
-reachLabel.Text = "مدى Reach: " .. reachSlider.Value
-reachLabel.Size = UDim2.new(0, 180, 0, 30)
-reachLabel.Position = UDim2.new(0, 10, 0, 10)
-reachLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-reachLabel.BackgroundTransparency = 1
-reachLabel.Parent = frame
+local function startReach()
+    local reachValue = 20
+    game:GetService("RunService").RenderStepped:Connect(function()
+        for _, v in pairs(game.Workspace:GetChildren()) do
+            if v.Name == "Ball" or v.Name == "Football" then
+                local lp = game.Players.LocalPlayer
+                if lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") then
+                    local mag = (lp.Character.HumanoidRootPart.Position - v.Position).Magnitude
+                    if mag <= reachValue then
+                        firetouchinterest(lp.Character.HumanoidRootPart, v, 0)
+                        firetouchinterest(lp.Character.HumanoidRootPart, v, 1)
+                    end
+                end
+            end
+        end
+    end)
+end
 
-reachSlider.Changed:Connect(function()
-    reachLabel.Text = "مدى Reach: " .. reachSlider.Value
-    reachDistance = reachSlider.Value
+ActivateBtn.MouseButton1Click:Connect(function()
+    startReach()
+    ActivateBtn.Text = "RUNNING"
+    ActivateBtn.BackgroundColor3 = Color3.fromRGB(120, 0, 0)
 end)
-
-local function applyReachHack()
-    local character = game.Players.LocalPlayer.Character
-    if character then
-        game:GetService("ReplicatedStorage").Events.ReachEvent:FireServer(reachDistance)
-    end
-end
-
-while true do
-    applyReachHack()
-    wait(0.1)
-end
