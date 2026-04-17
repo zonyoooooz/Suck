@@ -5,7 +5,7 @@ local PingLabel = Instance.new("TextLabel")
 local IncreaseBtn = Instance.new("TextButton")
 local DecreaseBtn = Instance.new("TextButton")
 
-local fakePingValue = 100
+local fakePingValue = 15
 
 ScreenGui.Parent = game.CoreGui
 MainFrame.Parent = ScreenGui
@@ -25,7 +25,6 @@ PingLabel.Parent = MainFrame
 PingLabel.Position = UDim2.new(0, 0, 0.3, 0)
 PingLabel.Size = UDim2.new(1, 0, 0, 30)
 PingLabel.Text = "Fake Ping: " .. fakePingValue .. "ms"
-PingLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
 PingLabel.BackgroundTransparency = 1
 
 IncreaseBtn.Parent = MainFrame
@@ -42,26 +41,44 @@ DecreaseBtn.Text = "-"
 DecreaseBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 DecreaseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 
-local function updateDisplay()
-    PingLabel.Text = "Fake Ping: " .. fakePingValue .. "ms"
+local function getPingColor(val)
+    if val < 20 then
+        return Color3.fromRGB(0, 255, 0)
+    elseif val >= 40 and val <= 60 then
+        return Color3.fromRGB(255, 255, 0)
+    else
+        return Color3.fromRGB(255, 100, 0)
+    end
 end
 
+local function updateDisplay()
+    PingLabel.Text = "Fake Ping: " .. fakePingValue .. "ms"
+    PingLabel.TextColor3 = getPingColor(fakePingValue)
+end
+
+updateDisplay()
+
 IncreaseBtn.MouseButton1Click:Connect(function()
-    fakePingValue = fakePingValue + 50
+    fakePingValue = fakePingValue + 5
     updateDisplay()
 end)
 
 DecreaseBtn.MouseButton1Click:Connect(function()
     if fakePingValue > 0 then
-        fakePingValue = fakePingValue - 50
+        fakePingValue = fakePingValue - 5
         updateDisplay()
     end
 end)
 
 game:GetService("RunService").Heartbeat:Connect(function()
-    if fakePingValue > 100 then
-        local delayTime = fakePingValue / 1000
-        local startTime = tick()
-        repeat until tick() - startTime >= delayTime
-    end
+    pcall(function()
+        local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        local currentColor = getPingColor(fakePingValue)
+        for _, v in pairs(PlayerGui:GetDescendants()) do
+            if v:IsA("TextLabel") and (v.Name:lower():find("ping") or v.Text:lower():find("ms")) then
+                v.Text = tostring(fakePingValue) .. " ms"
+                v.TextColor3 = currentColor
+            end
+        end
+    end)
 end)
