@@ -1,37 +1,43 @@
-local player = game.Players.LocalPlayer
-local char = player.Character or player.CharacterAdded:Wait()
-local hrp = char:WaitForChild("HumanoidRootPart")
-local ball = workspace:FindFirstChild("Ball")
+local reachDistance = 50
 
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer.PlayerGui
 
-local active = false
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 150)
+frame.Position = UDim2.new(0.5, -100, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.Parent = screenGui
 
-if ball then
-	ball.Anchored = false
-	if not ball:FindFirstChild("BodyVelocity") then
-		local bv = Instance.new("BodyVelocity")
-		bv.Name = "HoldVelocity"
-		bv.Velocity = Vector3.new(0, 0, 0)
-		bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-		bv.Parent = ball
-	end
+local reachSlider = Instance.new("Slider")
+reachSlider.Min = 10
+reachSlider.Max = 100
+reachSlider.Size = UDim2.new(0, 180, 0, 30)
+reachSlider.Position = UDim2.new(0, 10, 0, 40)
+reachSlider.Parent = frame
+reachSlider.Value = reachDistance
+
+local reachLabel = Instance.new("TextLabel")
+reachLabel.Text = "مدى Reach: " .. reachSlider.Value
+reachLabel.Size = UDim2.new(0, 180, 0, 30)
+reachLabel.Position = UDim2.new(0, 10, 0, 10)
+reachLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+reachLabel.BackgroundTransparency = 1
+reachLabel.Parent = frame
+
+reachSlider.Changed:Connect(function()
+    reachLabel.Text = "مدى Reach: " .. reachSlider.Value
+    reachDistance = reachSlider.Value
+end)
+
+local function applyReachHack()
+    local character = game.Players.LocalPlayer.Character
+    if character then
+        game:GetService("ReplicatedStorage").Events.ReachEvent:FireServer(reachDistance)
+    end
 end
 
-userInputService.InputBegan:Connect(function(input, gameProcessed)
-	if gameProcessed then return end
-	if input.KeyCode == Enum.KeyCode.Q then
-		active = not active
-	end
-end)
-
-runService.RenderStepped:Connect(function()
-	if active and ball and hrp then
-		ball.Position = hrp.Position + Vector3.new(0, -1.5, 0)
-		ball.Velocity = Vector3.new(0, 0, 0)
-	elseif not active and ball then
-		local bv = ball:FindFirstChild("HoldVelocity")
-		if bv then bv:Destroy() end
-	end
-end)
+while true do
+    applyReachHack()
+    wait(0.1)
+end
