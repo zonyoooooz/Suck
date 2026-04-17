@@ -1,374 +1,89 @@
--- Modified by Zero
--- No Key System 
-
-local v1 = table.find({
-    Enum.Platform.IOS,
-    Enum.Platform.Android,
-}, game:GetService('UserInputService'):GetPlatform())
-
+local v1 = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService('UserInputService'):GetPlatform())
 function RandomTheme()
-    local v2 = {
-        'Amethyst',
-        'Light',
-        'Aqua',
-        'Rose',
-        'Darker',
-        'Dark',
-    }
-
+    local v2 = {'Amethyst', 'Light', 'Aqua', 'Rose', 'Darker', 'Dark'}
     return v2[math.random(1, #v2)]
 end
-
 local u3 = RandomTheme()
 
 if v1 then
     High = 360
-
     local u13 = game:GetService('CoreGui').ChildAdded:Connect(function(p4)
         if p4.Name == 'ScreenGui' then
             local _ScreenGui = Instance.new('ScreenGui')
             local _TextButton = Instance.new('TextButton')
             local _UICorner = Instance.new('UICorner')
-
             _ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild('PlayerGui')
             _TextButton.Name = 'Hider'
             _TextButton.Parent = p4
             _TextButton.Size = UDim2.new(0, 100, 0, 50)
             _TextButton.Position = UDim2.new(0, 10, 0.5, -25)
             _TextButton.BackgroundTransparency = 0.5
-            _TextButton.Font = Enum.Font.GothamBold
-            _TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
             _TextButton.Text = 'Hide'
-            _TextButton.TextScaled = true
-            _TextButton.Draggable = true
-            _TextButton.AutoButtonColor = false
-            _TextButton.BackgroundColor3 = ({
-                Light = Color3.fromRGB(255, 255, 255),
-                Amethyst = Color3.fromRGB(153, 102, 204),
-                Aqua = Color3.fromRGB(0, 255, 255),
-                Rose = Color3.fromRGB(255, 182, 193),
-                Darker = Color3.fromRGB(40, 40, 40),
-                Dark = Color3.fromRGB(30, 30, 30),
-            })[u3] or Color3.fromRGB(255, 255, 255)
+            _TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            _TextButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
             _UICorner.Parent = _TextButton
-            _UICorner.CornerRadius = UDim.new(0, 12)
-
             _TextButton.MouseButton1Click:Connect(function()
-                local v8 = p4
-                local v9, v10, v11 = ipairs(v8:GetChildren())
-
-                while true do
-                    local v12
-
-                    v11, v12 = v9(v10, v11)
-
-                    if v11 == nil then
-                        break
-                    end
-                    if v12.Name ~= 'Hider' and not v12:FindFirstChild('UIListLayout') then
-                        if v12.Visible then
-                            _TextButton.Text = 'View'
-                            v12.Visible = false
-                        else
-                            _TextButton.Text = 'Hide'
-                            v12.Visible = true
-                        end
+                for _, v in pairs(p4:GetChildren()) do
+                    if v.Name ~= 'Hider' and v:IsA("Frame") then
+                        v.Visible = not v.Visible
+                        _TextButton.Text = v.Visible and "Hide" or "View"
                     end
                 end
             end)
-
             getgenv().Done = true
         end
-    end)
-
-    spawn(function()
-        while not getgenv().Done do
-            task.wait()
-        end
-
-        if u13 then
-            u13:Disconnect()
-        end
-
-        getgenv().Done = false
     end)
 else
     High = 460
 end
 
 local u14 = loadstring(game:HttpGet('https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua'))()
-local _CreateWindow = u14.CreateWindow
-local v16 = {
-    Title = game:GetService('MarketplaceService'):GetProductInfo(game.PlaceId).Name,
+local v17 = u14:CreateWindow({
+    Title = "TPS: Street Soccer 🏆",
     SubTitle = 'By zon',
     TabWidth = 160,
     Size = UDim2.fromOffset(580, High),
     Acrylic = false,
     Theme = u3,
-    MinimizeKey = Enum.KeyCode.LeftControl,
-}
-local v17 = _CreateWindow(u14, v16)
-local v18 = {
-    Gameplay = v17:AddTab({
-        Title = 'Gameplay',
-        Icon = 'gamepad-2',
-    }),
-    PlayerP = v17:AddTab({
-        Title = 'Player',
-        Icon = 'person-standing',
-    }),
-}
-local _ReachOptions = v18.Gameplay:AddSection('Reach Options')
-local _FarmOptions = v18.Gameplay:AddSection('Farm Options')
-local _BallOptions = v18.Gameplay:AddSection('Ball Options')
-local _PlayerSpeed = v18.PlayerP:AddSection('Player Speed')
-local _PlayerFov = v18.PlayerP:AddSection('Player Fov')
-local _PlayerTeam = v18.PlayerP:AddSection('Player Team')
-local _ = u14.Options
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
 
-if game:FindFirstChild('Banned', true) then
-    game:FindFirstChild('Banned', true):Destroy()
-end
-
-workspace.FE.Actions.ChildAdded:Connect(function(p25)
-    if p25.Name == 'Banned' then
-        p25:Destroy()
-    end
-end)
-
-getgenv().Autofarm = {
-    Goal = false,
-    GoalKeeper = false,
-}
-getgenv().BallOptions = {
-    Blue = false,
-    Red = false,
-}
-getgenv().Reach = {
-    Enabled = false,
-    Range = 0,
-}
-getgenv().FovHack = {
-    Enabled = false,
-    Old = workspace.Camera.FieldOfView,
-    Value = 0,
-}
-getgenv().SpeedHack = {
-    Enabled = false,
-    Value = 0,
+local Tabs = {
+    Gameplay = v17:AddTab({ Title = 'Gameplay', Icon = 'gamepad-2' }),
+    Player = v17:AddTab({ Title = 'Player', Icon = 'person-standing' })
 }
 
-function PLeg()
-    if game:GetService('Players').LocalPlayer.PlayerGui.Start.Settings.Options.PreferredFoot.Text ~= 'Left' then
-        return game:GetService('Players').LocalPlayer.Character:FindFirstChild('Right Leg') or (game:GetService('Players').LocalPlayer.Character:FindFirstChild('RightLowerLeg') or game:GetService('Players').LocalPlayer.Character:FindFirstChild('RightFoot'))
-    else
-        return game:GetService('Players').LocalPlayer.Character:FindFirstChild('Left Leg') or (game:GetService('Players').LocalPlayer.Character:FindFirstChild('LeftLowerLeg') or game:GetService('Players').LocalPlayer.Character:FindFirstChild('LeftFoot'))
-    end
-end
+local _ReachOptions = Tabs.Gameplay:AddSection('Reach Options')
+local _FarmOptions = Tabs.Gameplay:AddSection('Farm Options')
+local _BallOptions = Tabs.Gameplay:AddSection('Ball Options')
 
-function GetGoal(p26)
-    if game.Players.LocalPlayer.Team.Name ~= 'Blue' then
-        if game.Players.LocalPlayer.Team.Name ~= 'Red' then
-            return nil
-        end
-        if p26 == 'Them' then
-            return game:GetService('Workspace').TPSSystem.Part2
-        end
-        if p26 == 'Me' then
-            return game:GetService('Workspace').TPSSystem.Part1
-        end
-    else
-        if p26 == 'Them' then
-            return game:GetService('Workspace').TPSSystem.Part1
-        end
-        if p26 == 'Me' then
-            return game:GetService('Workspace').TPSSystem.Part2
-        end
-    end
-end
+getgenv().Reach = { Enabled = false, Range = 10 }
 
-function Notify(p27, p28)
-    u14:Notify({
-        Title = tostring(p27),
-        Content = tostring(p28),
-        Duration = 5,
-    })
-
-    local _Sound = Instance.new('Sound', game.Workspace)
-    _Sound.SoundId = 'rbxassetid://3398620867'
-    _Sound.Volume = 1
-    _Sound.Ended:Connect(function()
-        _Sound:Destroy()
-    end)
-    _Sound:Play()
-end
-
-_ReachOptions:AddToggle('Nothing', {
+_ReachOptions:AddToggle('ReachToggle', {
     Title = 'Enable Reach',
-    Description = nil,
     Default = false,
-    Callback = function(p31)
-        getgenv().Reach.Enabled = p31
+    Callback = function(state)
+        getgenv().Reach.Enabled = state
         while getgenv().Reach.Enabled do
             pcall(function()
-                if (PLeg().Position - workspace.TPSSystem.TPS.Position).Magnitude <= getgenv().Reach.Range * 2 then
-                    firetouchinterest(PLeg(), workspace.TPSSystem.TPS, 0)
-                    firetouchinterest(PLeg(), workspace.TPSSystem.TPS, 1)
+                local ball = workspace.TPSSystem.TPS
+                local char = game.Players.LocalPlayer.Character
+                local leg = char:FindFirstChild("Right Leg") or char:FindFirstChild("RightLowerLeg")
+                if (leg.Position - ball.Position).Magnitude <= getgenv().Reach.Range * 2 then
+                    firetouchinterest(leg, ball, 0)
+                    firetouchinterest(leg, ball, 1)
                 end
             end)
             task.wait()
         end
-    end,
+    end
 })
 
-_ReachOptions:AddSlider('Nothing', {
+_ReachOptions:AddSlider('ReachSlider', {
     Title = 'Range',
-    Description = nil,
-    Default = 10,
-    Min = 0,
-    Max = 10,
-    Rounding = 0.1,
-    Callback = function(p32)
-        getgenv().Reach.Range = p32
-    end,
+    Min = 0, Max = 15, Default = 10, Rounding = 0.1,
+    Callback = function(val) getgenv().Reach.Range = val end
 })
 
-_FarmOptions:AddToggle('Nothing', {
-    Title = 'Auto-Goal',
-    Description = nil,
-    Default = false,
-    Callback = function(p33)
-        getgenv().Autofarm.Goal = p33
-        if p33 then
-            Notify('Be Careful', 'Safety measure: Goal farm active.')
-        end
-        while getgenv().Autofarm.Goal do
-            task.wait()
-            pcall(function()
-                if GetGoal('Them') and game:GetService('Workspace').TPSSystem.TPS.Position.Y > 10 then
-                    local _Magnitude = (GetGoal('Them').CFrame.p - game:GetService('Workspace').TPSSystem.TPS.CFrame.p).Magnitude
-                    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(GetGoal('Them').CFrame.p, game:GetService('Workspace').TPSSystem.TPS.CFrame.p) * CFrame.new(0, 0, -_Magnitude - 3)
-                    game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position, GetGoal('Them').Position)
-                    workspace:WaitForChild('FE'):WaitForChild('Actions'):WaitForChild('Kick'):FireServer(workspace:WaitForChild('TPSSystem'):WaitForChild('TPS'), 35, Vector3.new(4000000, 10, 4000000), true, false, 0)
-                end
-            end)
-        end
-    end,
-})
-
-_FarmOptions:AddToggle('Nothing', {
-    Title = 'Auto-Goalkeeper',
-    Description = nil,
-    Default = false,
-    Callback = function(p35)
-        getgenv().Autofarm.Goalkeeper = p35
-        while getgenv().Autofarm.Goalkeeper do
-            task.wait()
-            if GetGoal('Them') and game:GetService('Workspace').TPSSystem.TPS.Position.Y > 10 and (GetGoal('Them').Name == 'Part1' and game:GetService('Workspace').TPSSystem.TPS.Position.Z > 70 or GetGoal('Them').Name == 'Part2' and game:GetService('Workspace').TPSSystem.TPS.Position.Z < -70) then
-                local _Magnitude2 = (GetGoal('Them').CFrame.p - game:GetService('Workspace').TPSSystem.TPS.CFrame.p).Magnitude
-                game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(GetGoal('Them').CFrame.p, game:GetService('Workspace').TPSSystem.TPS.CFrame.p) * CFrame.new(0, 0, -_Magnitude2 - 3)
-                game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position, GetGoal('Them').Position)
-                workspace:WaitForChild('FE'):WaitForChild('Actions'):WaitForChild('Kick'):FireServer(workspace:WaitForChild('TPSSystem'):WaitForChild('TPS'), 65, Vector3.new(4000000, 1100, 4000000), true, false, 0)
-            end
-        end
-    end,
-})
-
-BlueBall = _BallOptions:AddToggle('Nothing', {
-    Title = 'Blue Fire Ball',
-    Description = nil,
-    Default = false,
-    Callback = function(p37)
-        getgenv().BallOptions.Blue = p37
-        if p37 then RedBall:SetValue(false) end
-        while getgenv().BallOptions.Blue do
-            wait(0.1)
-            workspace.FE.Kick.RemoteEvent1:FireServer(2)
-        end
-    end,
-})
-
-RedBall = _BallOptions:AddToggle('Nothing', {
-    Title = 'Red Fire Ball',
-    Description = nil,
-    Default = false,
-    Callback = function(p38)
-        getgenv().BallOptions.Red = p38
-        if p38 then BlueBall:SetValue(false) end
-        while getgenv().BallOptions.Red do
-            wait(0.1)
-            workspace.FE.Kick.RemoteEvent1:FireServer(1)
-        end
-    end,
-})
-
-_PlayerSpeed:AddToggle('Nothing', {
-    Title = 'Enable Speed',
-    Description = nil,
-    Default = false,
-    Callback = function(p39)
-        getgenv().SpeedHack.Enabled = p39
-        while getgenv().SpeedHack.Enabled and task.wait() do
-            pcall(function()
-                local _Character = game.Players.LocalPlayer.Character
-                local v41 = _Character and _Character:FindFirstChildWhichIsA('Humanoid')
-                if v41 and v41.MoveDirection.Magnitude > 0 then
-                    _Character:TranslateBy(v41.MoveDirection * (getgenv().SpeedHack.Value or 1) * game:GetService('RunService').Heartbeat:Wait() * 10)
-                end
-            end)
-        end
-    end,
-})
-
-_PlayerSpeed:AddSlider('Nothing', {
-    Title = 'Speed Value',
-    Description = nil,
-    Default = 1,
-    Min = 1,
-    Max = 10,
-    Rounding = 0.1,
-    Callback = function(p42)
-        getgenv().SpeedHack.Value = p42
-    end,
-})
-
-_PlayerFov:AddToggle('Nothing', {
-    Title = 'Enable Fov',
-    Description = nil,
-    Default = false,
-    Callback = function(p43)
-        getgenv().FovHack.Enabled = p43
-        while getgenv().FovHack.Enabled and wait() do
-            workspace.Camera.FieldOfView = getgenv().FovHack.Value
-        end
-        if not getgenv().FovHack.Enabled then
-            workspace.Camera.FieldOfView = getgenv().FovHack.Old
-        end
-    end,
-})
-
-_PlayerFov:AddSlider('Nothing', {
-    Title = 'Fov Value',
-    Description = nil,
-    Default = getgenv().FovHack.Old,
-    Min = 70,
-    Max = 120,
-    Rounding = 0.1,
-    Callback = function(p44)
-        getgenv().FovHack.Value = p44
-    end,
-})
-
-_PlayerTeam:AddButton({
-    Title = 'Switch to red team',
-    Callback = function() workspace:WaitForChild('FE'):WaitForChild('CTeamColor'):WaitForChild('RemoteEventR'):FireServer() end,
-})
-
-_PlayerTeam:AddButton({
-    Title = 'Switch to blue team',
-    Callback = function() workspace:WaitForChild('FE'):WaitForChild('CTeamColor'):WaitForChild('RemoteEventB'):FireServer() end,
-})
-
-v17:SelectTab(1)
-Notify('Welcome (:', 'Updated Script - Owner: zon')
+u14:Notify({ Title = "System Active", Content = "Loaded by zon", Duration = 5 })
 setclipboard('zon')
