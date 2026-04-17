@@ -1,89 +1,67 @@
-local v1 = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService('UserInputService'):GetPlatform())
-function RandomTheme()
-    local v2 = {'Amethyst', 'Light', 'Aqua', 'Rose', 'Darker', 'Dark'}
-    return v2[math.random(1, #v2)]
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local PingLabel = Instance.new("TextLabel")
+local IncreaseBtn = Instance.new("TextButton")
+local DecreaseBtn = Instance.new("TextButton")
+
+local fakePingValue = 100
+
+ScreenGui.Parent = game.CoreGui
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.Position = UDim2.new(0.8, 0, 0.2, 0)
+MainFrame.Size = UDim2.new(0, 180, 0, 130)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+Title.Parent = MainFrame
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Text = "ZERO PING CONTROL"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+
+PingLabel.Parent = MainFrame
+PingLabel.Position = UDim2.new(0, 0, 0.3, 0)
+PingLabel.Size = UDim2.new(1, 0, 0, 30)
+PingLabel.Text = "Fake Ping: " .. fakePingValue .. "ms"
+PingLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+PingLabel.BackgroundTransparency = 1
+
+IncreaseBtn.Parent = MainFrame
+IncreaseBtn.Position = UDim2.new(0.1, 0, 0.65, 0)
+IncreaseBtn.Size = UDim2.new(0.35, 0, 0.25, 0)
+IncreaseBtn.Text = "+"
+IncreaseBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+IncreaseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+DecreaseBtn.Parent = MainFrame
+DecreaseBtn.Position = UDim2.new(0.55, 0, 0.65, 0)
+DecreaseBtn.Size = UDim2.new(0.35, 0, 0.25, 0)
+DecreaseBtn.Text = "-"
+DecreaseBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+DecreaseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+local function updateDisplay()
+    PingLabel.Text = "Fake Ping: " .. fakePingValue .. "ms"
 end
-local u3 = RandomTheme()
 
-if v1 then
-    High = 360
-    local u13 = game:GetService('CoreGui').ChildAdded:Connect(function(p4)
-        if p4.Name == 'ScreenGui' then
-            local _ScreenGui = Instance.new('ScreenGui')
-            local _TextButton = Instance.new('TextButton')
-            local _UICorner = Instance.new('UICorner')
-            _ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild('PlayerGui')
-            _TextButton.Name = 'Hider'
-            _TextButton.Parent = p4
-            _TextButton.Size = UDim2.new(0, 100, 0, 50)
-            _TextButton.Position = UDim2.new(0, 10, 0.5, -25)
-            _TextButton.BackgroundTransparency = 0.5
-            _TextButton.Text = 'Hide'
-            _TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            _TextButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-            _UICorner.Parent = _TextButton
-            _TextButton.MouseButton1Click:Connect(function()
-                for _, v in pairs(p4:GetChildren()) do
-                    if v.Name ~= 'Hider' and v:IsA("Frame") then
-                        v.Visible = not v.Visible
-                        _TextButton.Text = v.Visible and "Hide" or "View"
-                    end
-                end
-            end)
-            getgenv().Done = true
-        end
-    end)
-else
-    High = 460
-end
+IncreaseBtn.MouseButton1Click:Connect(function()
+    fakePingValue = fakePingValue + 50
+    updateDisplay()
+end)
 
-local u14 = loadstring(game:HttpGet('https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua'))()
-local v17 = u14:CreateWindow({
-    Title = "TPS: Street Soccer 🏆",
-    SubTitle = 'By zon',
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, High),
-    Acrylic = false,
-    Theme = u3,
-    MinimizeKey = Enum.KeyCode.LeftControl
-})
-
-local Tabs = {
-    Gameplay = v17:AddTab({ Title = 'Gameplay', Icon = 'gamepad-2' }),
-    Player = v17:AddTab({ Title = 'Player', Icon = 'person-standing' })
-}
-
-local _ReachOptions = Tabs.Gameplay:AddSection('Reach Options')
-local _FarmOptions = Tabs.Gameplay:AddSection('Farm Options')
-local _BallOptions = Tabs.Gameplay:AddSection('Ball Options')
-
-getgenv().Reach = { Enabled = false, Range = 10 }
-
-_ReachOptions:AddToggle('ReachToggle', {
-    Title = 'Enable Reach',
-    Default = false,
-    Callback = function(state)
-        getgenv().Reach.Enabled = state
-        while getgenv().Reach.Enabled do
-            pcall(function()
-                local ball = workspace.TPSSystem.TPS
-                local char = game.Players.LocalPlayer.Character
-                local leg = char:FindFirstChild("Right Leg") or char:FindFirstChild("RightLowerLeg")
-                if (leg.Position - ball.Position).Magnitude <= getgenv().Reach.Range * 2 then
-                    firetouchinterest(leg, ball, 0)
-                    firetouchinterest(leg, ball, 1)
-                end
-            end)
-            task.wait()
-        end
+DecreaseBtn.MouseButton1Click:Connect(function()
+    if fakePingValue > 0 then
+        fakePingValue = fakePingValue - 50
+        updateDisplay()
     end
-})
+end)
 
-_ReachOptions:AddSlider('ReachSlider', {
-    Title = 'Range',
-    Min = 0, Max = 15, Default = 10, Rounding = 0.1,
-    Callback = function(val) getgenv().Reach.Range = val end
-})
-
-u14:Notify({ Title = "System Active", Content = "Loaded by zon", Duration = 5 })
-setclipboard('zon')
+game:GetService("RunService").Heartbeat:Connect(function()
+    if fakePingValue > 100 then
+        local delayTime = fakePingValue / 1000
+        local startTime = tick()
+        repeat until tick() - startTime >= delayTime
+    end
+end)
