@@ -1,0 +1,107 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "ZERO | TPS ULTIMATE",
+    SubTitle = "By zon",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = false,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Reach", Icon = "zap" }),
+    Shop = Window:AddTab({ Title = "Gamepasses", Icon = "shopping-cart" })
+}
+
+getgenv().ZonConfig = {
+    Enabled = false,
+    Size = 10,
+    UnlockAll = false
+}
+
+local ReachSection = Tabs.Main:AddSection("Reach Settings")
+
+Tabs.Main:AddToggle("ReachToggle", {
+    Title = "Enable Reach",
+    Default = false,
+    Callback = function(v) getgenv().ZonConfig.Enabled = v end
+})
+
+Tabs.Main:AddInput("ReachInput", {
+    Title = "Set Reach Size (Type Here)",
+    Default = "10",
+    Numeric = true,
+    Finished = true,
+    Callback = function(Value)
+        local num = tonumber(Value)
+        if num then
+            if num > 19 then num = 19 end
+            getgenv().ZonConfig.Size = num
+        end
+    end
+})
+
+Tabs.Main:AddSlider("ReachSlider", {
+    Title = "Reach Slider",
+    Min = 1, Max = 19, Default = 10,
+    Rounding = 1,
+    Callback = function(v) getgenv().ZonConfig.Size = v end
+})
+
+local ShopSection = Tabs.Shop:AddSection("Gamepass Unlocker")
+
+Tabs.Shop:AddButton({
+    Title = "Unlock Faster Cooldown & More Curve",
+    Callback = function()
+        pcall(function()
+            local lp = game.Players.LocalPlayer
+            local passFolder = lp:FindFirstChild("Passes") or lp:FindFirstChild("Gamepasses") or lp:FindFirstChild("Data")
+            
+            if passFolder then
+                local function unlock(name)
+                    local p = passFolder:FindFirstChild(name) or Instance.new("BoolValue", passFolder)
+                    p.Name = name
+                    p.Value = true
+                end
+                
+                unlock("FasterCooldown")
+                unlock("MoreCurve")
+                unlock("DoubleCurve")
+                unlock("FastCooldown")
+            end
+            
+            if lp.Character and lp.Character:FindFirstChild("Values") then
+                if lp.Character.Values:FindFirstChild("CanCurve") then
+                    lp.Character.Values.CanCurve.Value = true
+                end
+            end
+        end)
+    end
+})
+
+local lastPulse = 0
+game:GetService("RunService").Heartbeat:Connect(function()
+    pcall(function()
+        local lp = game.Players.LocalPlayer
+        
+        if getgenv().ZonConfig.Enabled then
+            local ball = workspace.TPSSystem.TPS
+            local root = lp.Character.HumanoidRootPart
+            if root and ball then
+                local dist = (root.Position - ball.Position).Magnitude
+                if dist <= getgenv().ZonConfig.Size then
+                    local now = tick()
+                    if now - lastPulse >= 0.05 then
+                        firetouchinterest(root, ball, 0)
+                        firetouchinterest(root, ball, 1)
+                        lastPulse = now
+                    end
+                end
+            end
+        end
+    end)
+end)
+
+Window:SelectTab(1)
