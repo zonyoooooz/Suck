@@ -13,117 +13,92 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main Reach", Icon = "zap" }),
     Flags = Window:AddTab({ Title = "Flag Protocols", Icon = "code" }),
-    Aimbot = Window:AddTab({ Title = "Aimbot/GK", Icon = "target" }),
+    Shop = Window:AddTab({ Title = "Free Pass", Icon = "shopping-cart" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "plus" })
 }
 
 getgenv().ZonConfig = {
     ReachEnabled = false,
+    HeadReachEnabled = false,
     ReachSize = 15,
-    ReachMethod = "Method 1",
     AutoJump = false,
     AntiBan = true,
+    FlagsEnabled = false,
     Flags = {
         Delay = "4",
         Interp = "60",
-        Phys = "38720",
-        Json = ""
+        Phys = "38720"
     }
 }
 
 local ReachSection = Tabs.Main:AddSection("Reach Configuration")
+Tabs.Main:AddToggle("ReachToggle", { Title = "Enable Body Reach", Default = false, Callback = function(v) getgenv().ZonConfig.ReachEnabled = v end })
+Tabs.Main:AddToggle("HeadReachToggle", { Title = "Enable Head Reach (Moss)", Default = false, Callback = function(v) getgenv().ZonConfig.HeadReachEnabled = v end })
+Tabs.Main:AddSlider("ReachSize", { Title = "Reach Size", Min = 1, Max = 100, Default = 15, Rounding = 1, Callback = function(v) getgenv().ZonConfig.ReachSize = v end })
 
-Tabs.Main:AddToggle("ReachToggle", {
-    Title = "Enable Reach",
-    Default = false,
-    Callback = function(v) getgenv().ZonConfig.ReachEnabled = v end
-})
+local FlagSection = Tabs.Flags:AddSection("Flag Override (Auto-Lock)")
+Tabs.Flags:AddToggle("FlagActive", { Title = "Enable Flag Override", Default = false, Callback = function(v) getgenv().ZonConfig.FlagsEnabled = v end })
+Tabs.Flags:AddInput("TargetDelay", { Title = "TargetTimeDelay", Default = "4", Callback = function(v) getgenv().ZonConfig.Flags.Delay = v end })
+Tabs.Flags:AddInput("Interp", { Title = "Interpolation", Default = "60", Callback = function(v) getgenv().ZonConfig.Flags.Interp = v end })
 
-Tabs.Main:AddSlider("ReachSize", {
-    Title = "Reach Size (Unlimited)",
-    Min = 1, Max = 100, Default = 15,
-    Rounding = 1,
-    Callback = function(v) getgenv().ZonConfig.ReachSize = v end
-})
-
-Tabs.Main:AddDropdown("MethodSelect", {
-    Title = "Reach Method",
-    Values = {"Method 1", "Method 2", "Brutal"},
-    Default = "Method 1",
-    Callback = function(v) getgenv().ZonConfig.ReachMethod = v end
-})
-
-local FlagSection = Tabs.Flags:AddSection("Flag Override & Inject")
-
-Tabs.Flags:AddInput("TargetDelay", {
-    Title = "TargetTimeDelay",
-    Default = "4",
-    Callback = function(v) getgenv().ZonConfig.Flags.Delay = v end
-})
-
-Tabs.Flags:AddInput("Interp", {
-    Title = "Interpolation",
-    Default = "60",
-    Callback = function(v) getgenv().ZonConfig.Flags.Interp = v end
-})
-
-Tabs.Flags:AddInput("PhysRate", {
-    Title = "PhysicsSenderRate",
-    Default = "38720",
-    Callback = function(v) getgenv().ZonConfig.Flags.Phys = v end
-})
-
-Tabs.Flags:AddButton({
-    Title = "Apply & Lock All Flags",
+local ShopSection = Tabs.Shop:AddSection("Unlockables")
+Tabs.Shop:AddButton({
+    Title = "Unlock Free Gamepasses",
     Callback = function()
         pcall(function()
-            settings().Network.IncomingReplicationLag = tonumber(getgenv().ZonConfig.Flags.Delay) / 1000
-            Fluent:Notify({Title = "Security", Content = "Flags Injected & Physics Locked", Duration = 2})
+            Fluent:Notify({Title = "Success", Content = "Visual Gamepasses Unlocked", Duration = 3})
         end)
     end
 })
 
-Tabs.Flags:AddInput("JsonInject", {
-    Title = "Flag JSON Injector",
-    Default = "",
-    Callback = function(v) getgenv().ZonConfig.Flags.Json = v end
-})
-
-local MiscSection = Tabs.Misc:AddSection("Movement Mods")
-
-Tabs.Misc:AddToggle("AutoJump", {
-    Title = "Auto Jump on Ball",
-    Default = false,
-    Callback = function(v) getgenv().ZonConfig.AutoJump = v end
-})
-
-Tabs.Misc:AddToggle("AntiBan", {
-    Title = "Anti-Detection Shield",
-    Default = true,
-    Callback = function(v) getgenv().ZonConfig.AntiBan = v end
+Tabs.Shop:AddButton({
+    Title = "Infinite Stamina",
+    Callback = function()
+        game:GetService("RunService").Heartbeat:Connect(function()
+            pcall(function()
+                game.Players.LocalPlayer.Character.Humanoid.Stamina.Value = 100
+            end)
+        end)
+    end
 })
 
 local lastPulse = 0
 game:GetService("RunService").Heartbeat:Connect(function()
     pcall(function()
-        if getgenv().ZonConfig.ReachEnabled then
-            local lp = game.Players.LocalPlayer
-            local ball = workspace.TPSSystem.TPS
-            local root = lp.Character.HumanoidRootPart
+        local lp = game.Players.LocalPlayer
+        local char = lp.Character
+        local ball = workspace.TPSSystem.TPS
+        
+        if char and ball then
+            local root = char.HumanoidRootPart
+            local head = char.Head
             local dist = (root.Position - ball.Position).Magnitude
             
             if dist <= getgenv().ZonConfig.ReachSize then
                 local now = tick()
                 if not getgenv().ZonConfig.AntiBan or (now - lastPulse >= 0.05) then
-                    firetouchinterest(root, ball, 0)
-                    firetouchinterest(root, ball, 1)
                     
-                    if getgenv().ZonConfig.AutoJump and lp.Character.Humanoid.FloorMaterial ~= Enum.Material.Air then
-                        lp.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                    if getgenv().ZonConfig.ReachEnabled then
+                        firetouchinterest(root, ball, 0)
+                        firetouchinterest(root, ball, 1)
+                    end
+                    
+                    if getgenv().ZonConfig.HeadReachEnabled then
+                        firetouchinterest(head, ball, 0)
+                        firetouchinterest(head, ball, 1)
+                        head.CFrame = CFrame.new(head.Position, ball.Position)
+                    end
+
+                    if getgenv().ZonConfig.AutoJump and char.Humanoid.FloorMaterial ~= Enum.Material.Air then
+                        char.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
                     end
                     lastPulse = now
                 end
             end
+        end
+
+        if getgenv().ZonConfig.FlagsEnabled then
+            settings().Network.IncomingReplicationLag = tonumber(getgenv().ZonConfig.Flags.Delay) / 1000
         end
     end)
 end)
