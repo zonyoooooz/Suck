@@ -1,0 +1,80 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "ZERO | SLIDE REACH EDITION",
+    SubTitle = "Tackle Protocol Active",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = false,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Security = Window:AddTab({ Title = "Safe Reach", Icon = "shield" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+getgenv().ZonSafe = {
+    Enabled = false,
+    Range = 7,
+    PulseDelay = 0.1,
+    SlideMode = true
+}
+
+local SecuritySection = Tabs.Security:AddSection("Safe Reach Configuration")
+
+Tabs.Security:AddToggle("SafeMode", {
+    Title = "Activate Slide Reach",
+    Default = false,
+    Callback = function(v) getgenv().ZonSafe.Enabled = v end
+})
+
+Tabs.Security:AddSlider("RangeSlider", {
+    Title = "Reach Range",
+    Min = 3, Max = 15, Default = 7,
+    Rounding = 1,
+    Callback = function(v) getgenv().ZonSafe.Range = v end
+})
+
+local lastPulse = 0
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().ZonSafe.Enabled then
+        local currentTime = tick()
+        
+        if currentTime - lastPulse >= getgenv().ZonSafe.PulseDelay then
+            pcall(function()
+                local lp = game.Players.LocalPlayer
+                local ball = workspace.TPSSystem.TPS
+                local char = lp.Character
+                local root = char.HumanoidRootPart
+                
+                local magnitude = (root.Position - ball.Position).Magnitude
+                
+                if magnitude <= getgenv().ZonSafe.Range then
+                    local touchParts = {
+                        root, 
+                        char:FindFirstChild("Right Foot"), 
+                        char:FindFirstChild("Left Foot"), 
+                        char:FindFirstChild("Right Leg"), 
+                        char:FindFirstChild("Left Leg"),
+                        char:FindFirstChild("RightLowerLeg"),
+                        char:FindFirstChild("LeftLowerLeg")
+                    }
+                    
+                    for _, part in pairs(touchParts) do
+                        if part then
+                            firetouchinterest(part, ball, 0)
+                            firetouchinterest(part, ball, 1)
+                        end
+                    end
+                    
+                    lastPulse = currentTime + math.random(0.01, 0.03)
+                end
+            end)
+        end
+    end
+end)
+
+Window:SelectTab(1)
