@@ -1,8 +1,8 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "ZERO | ANTI-BAN EDITION",
-    SubTitle = "Security Protocol Active",
+    Title = "ZERO | ULTIMATE OVERRIDE",
+    SubTitle = "By zon",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = false,
@@ -11,62 +11,121 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Security = Window:AddTab({ Title = "Safe Reach", Icon = "shield" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    Main = Window:AddTab({ Title = "Main Reach", Icon = "zap" }),
+    Flags = Window:AddTab({ Title = "Flag Protocols", Icon = "code" }),
+    Aimbot = Window:AddTab({ Title = "Aimbot/GK", Icon = "target" }),
+    Misc = Window:AddTab({ Title = "Misc", Icon = "plus" })
 }
 
-getgenv().ZonSafe = {
-    Enabled = false,
-    Range = 7,
-    PulseDelay = 0.15,
-    UseAntiCheatBypass = true
+getgenv().ZonConfig = {
+    ReachEnabled = false,
+    ReachSize = 15,
+    ReachMethod = "Method 1",
+    AutoJump = false,
+    AntiBan = true,
+    Flags = {
+        Delay = "4",
+        Interp = "60",
+        Phys = "38720",
+        Json = ""
+    }
 }
 
-local SecuritySection = Tabs.Security:AddSection("Safe Reach Configuration")
+local ReachSection = Tabs.Main:AddSection("Reach Configuration")
 
-Tabs.Security:AddToggle("SafeMode", {
-    Title = "Activate Anti-Ban Reach",
+Tabs.Main:AddToggle("ReachToggle", {
+    Title = "Enable Reach",
     Default = false,
-    Callback = function(v) getgenv().ZonSafe.Enabled = v end
+    Callback = function(v) getgenv().ZonConfig.ReachEnabled = v end
 })
 
-Tabs.Security:AddSlider("RangeSlider", {
-    Title = "Legit Range",
-    Min = 3, Max = 12, Default = 7,
+Tabs.Main:AddSlider("ReachSize", {
+    Title = "Reach Size (Unlimited)",
+    Min = 1, Max = 100, Default = 15,
     Rounding = 1,
-    Callback = function(v) getgenv().ZonSafe.Range = v end
+    Callback = function(v) getgenv().ZonConfig.ReachSize = v end
+})
+
+Tabs.Main:AddDropdown("MethodSelect", {
+    Title = "Reach Method",
+    Values = {"Method 1", "Method 2", "Brutal"},
+    Default = "Method 1",
+    Callback = function(v) getgenv().ZonConfig.ReachMethod = v end
+})
+
+local FlagSection = Tabs.Flags:AddSection("Flag Override & Inject")
+
+Tabs.Flags:AddInput("TargetDelay", {
+    Title = "TargetTimeDelay",
+    Default = "4",
+    Callback = function(v) getgenv().ZonConfig.Flags.Delay = v end
+})
+
+Tabs.Flags:AddInput("Interp", {
+    Title = "Interpolation",
+    Default = "60",
+    Callback = function(v) getgenv().ZonConfig.Flags.Interp = v end
+})
+
+Tabs.Flags:AddInput("PhysRate", {
+    Title = "PhysicsSenderRate",
+    Default = "38720",
+    Callback = function(v) getgenv().ZonConfig.Flags.Phys = v end
+})
+
+Tabs.Flags:AddButton({
+    Title = "Apply & Lock All Flags",
+    Callback = function()
+        pcall(function()
+            settings().Network.IncomingReplicationLag = tonumber(getgenv().ZonConfig.Flags.Delay) / 1000
+            Fluent:Notify({Title = "Security", Content = "Flags Injected & Physics Locked", Duration = 2})
+        end)
+    end
+})
+
+Tabs.Flags:AddInput("JsonInject", {
+    Title = "Flag JSON Injector",
+    Default = "",
+    Callback = function(v) getgenv().ZonConfig.Flags.Json = v end
+})
+
+local MiscSection = Tabs.Misc:AddSection("Movement Mods")
+
+Tabs.Misc:AddToggle("AutoJump", {
+    Title = "Auto Jump on Ball",
+    Default = false,
+    Callback = function(v) getgenv().ZonConfig.AutoJump = v end
+})
+
+Tabs.Misc:AddToggle("AntiBan", {
+    Title = "Anti-Detection Shield",
+    Default = true,
+    Callback = function(v) getgenv().ZonConfig.AntiBan = v end
 })
 
 local lastPulse = 0
-
 game:GetService("RunService").Heartbeat:Connect(function()
-    if getgenv().ZonSafe.Enabled then
-        local currentTime = tick()
-        
-        if currentTime - lastPulse >= getgenv().ZonSafe.PulseDelay then
-            pcall(function()
-                local lp = game.Players.LocalPlayer
-                local ball = workspace.TPSSystem.TPS
-                local root = lp.Character.HumanoidRootPart
-                
-                local magnitude = (root.Position - ball.Position).Magnitude
-                
-                if magnitude <= getgenv().ZonSafe.Range then
+    pcall(function()
+        if getgenv().ZonConfig.ReachEnabled then
+            local lp = game.Players.LocalPlayer
+            local ball = workspace.TPSSystem.TPS
+            local root = lp.Character.HumanoidRootPart
+            local dist = (root.Position - ball.Position).Magnitude
+            
+            if dist <= getgenv().ZonConfig.ReachSize then
+                local now = tick()
+                if not getgenv().ZonConfig.AntiBan or (now - lastPulse >= 0.05) then
                     firetouchinterest(root, ball, 0)
-                    task.wait(0.02)
                     firetouchinterest(root, ball, 1)
                     
-                    lastPulse = currentTime + math.random(0.01, 0.04)
+                    if getgenv().ZonConfig.AutoJump and lp.Character.Humanoid.FloorMaterial ~= Enum.Material.Air then
+                        lp.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                    end
+                    lastPulse = now
                 end
-            end)
+            end
         end
-    end
-end)
-
-if getgenv().ZonSafe.UseAntiCheatBypass then
-    pcall(function()
-        settings().Network.IncomingReplicationLag = 0.05
     end)
-end
+end)
 
 Window:SelectTab(1)
