@@ -1,8 +1,8 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "TPS: STREET SOCCER | ZON EDITION",
-    SubTitle = "The Future of Free",
+    Title = "ZERO | ANTI-BAN EDITION",
+    SubTitle = "Security Protocol Active",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = false,
@@ -11,79 +11,62 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "React & Moss", Icon = "Zap" }),
-    Ball = Window:AddTab({ Title = "Ball Mod", Icon = "Circle" }),
-    Visuals = Window:AddTab({ Title = "Visuals", Icon = "Eye" })
+    Security = Window:AddTab({ Title = "Safe Reach", Icon = "shield" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
-getgenv().Config = {
-    ReachEnabled = false,
-    ReachSize = 12,
-    MossEnabled = false,
-    GKReact = false,
-    BrutalReact = false,
-    BallSize = 2.9
+getgenv().ZonSafe = {
+    Enabled = false,
+    Range = 7,
+    PulseDelay = 0.15,
+    UseAntiCheatBypass = true
 }
 
-local ReactSection = Tabs.Main:AddSection("Main Power")
+local SecuritySection = Tabs.Security:AddSection("Safe Reach Configuration")
 
-Tabs.Main:AddToggle("ReachToggle", {
-    Title = "Enable Reach (Method 2)",
+Tabs.Security:AddToggle("SafeMode", {
+    Title = "Activate Anti-Ban Reach",
     Default = false,
-    Callback = function(v) getgenv().Config.ReachEnabled = v end
+    Callback = function(v) getgenv().ZonSafe.Enabled = v end
 })
 
-Tabs.Main:AddSlider("ReachSlider", {
-    Title = "Reach Size",
-    Min = 5, Max = 50, Default = 12,
+Tabs.Security:AddSlider("RangeSlider", {
+    Title = "Legit Range",
+    Min = 3, Max = 12, Default = 7,
     Rounding = 1,
-    Callback = function(v) getgenv().Config.ReachSize = v end
+    Callback = function(v) getgenv().ZonSafe.Range = v end
 })
 
-Tabs.Main:AddToggle("MossToggle", {
-    Title = "Enable Moss & Head Reach",
-    Default = false,
-    Callback = function(v) getgenv().Config.MossEnabled = v end
-})
+local lastPulse = 0
 
-Tabs.Main:AddToggle("GKToggle", {
-    Title = "GK React (Goalkeeper)",
-    Default = false,
-    Callback = function(v) getgenv().Config.GKReact = v end
-})
-
-local BallSection = Tabs.Ball:AddSection("Ball Modifications")
-
-Tabs.Ball:AddInput("BSize", {
-    Title = "Ball Size",
-    Default = "2.9",
-    Callback = function(v) getgenv().Config.BallSize = tonumber(v) or 2.9 end
-})
-
-game:GetService("RunService").RenderStepped:Connect(function()
-    pcall(function()
-        local lp = game.Players.LocalPlayer
-        local char = lp.Character
-        local ball = workspace.TPSSystem.TPS
+game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().ZonSafe.Enabled then
+        local currentTime = tick()
         
-        if char and ball then
-            local root = char.HumanoidRootPart
-            local dist = (root.Position - ball.Position).Magnitude
-            
-            if getgenv().Config.ReachEnabled and dist <= getgenv().Config.ReachSize then
-                firetouchinterest(root, ball, 0)
-                firetouchinterest(root, ball, 1)
-            end
-            
-            if getgenv().Config.MossEnabled then
-                char.Head.CFrame = CFrame.new(char.Head.Position, ball.Position)
-            end
-            
-            if ball:IsA("BasePart") then
-                ball.Size = Vector3.new(getgenv().Config.BallSize, getgenv().Config.BallSize, getgenv().Config.BallSize)
-            end
+        if currentTime - lastPulse >= getgenv().ZonSafe.PulseDelay then
+            pcall(function()
+                local lp = game.Players.LocalPlayer
+                local ball = workspace.TPSSystem.TPS
+                local root = lp.Character.HumanoidRootPart
+                
+                local magnitude = (root.Position - ball.Position).Magnitude
+                
+                if magnitude <= getgenv().ZonSafe.Range then
+                    firetouchinterest(root, ball, 0)
+                    task.wait(0.02)
+                    firetouchinterest(root, ball, 1)
+                    
+                    lastPulse = currentTime + math.random(0.01, 0.04)
+                end
+            end)
         end
-    end)
+    end
 end)
+
+if getgenv().ZonSafe.UseAntiCheatBypass then
+    pcall(function()
+        settings().Network.IncomingReplicationLag = 0.05
+    end)
+end
 
 Window:SelectTab(1)
