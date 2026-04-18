@@ -1,0 +1,50 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "ZERO | ALL FLAGS INJECTOR",
+    SubTitle = "Mobile Engine Override",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = false,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Universal Injector", Icon = "syringe" })
+}
+
+local TargetFlag = { Name = "", Value = "" }
+
+Tabs.Main:AddInput("FlagName", {
+    Title = "Flag Name",
+    Default = "",
+    Callback = function(v) TargetFlag.Name = v end
+})
+
+Tabs.Main:AddInput("FlagValue", {
+    Title = "Flag Value",
+    Default = "",
+    Callback = function(v) TargetFlag.Value = v end
+})
+
+Tabs.Main:AddButton({
+    Title = "Inject & Lock Flag",
+    Callback = function()
+        pcall(function()
+            local s = settings()
+            local name = TargetFlag.Name
+            local val = tonumber(TargetFlag.Value) or TargetFlag.Value
+            
+            if name == "TargetTimeDelay" or name == "DelayFactor" then
+                s.Network.IncomingReplicationLag = tonumber(TargetFlag.Value) / 1000
+            elseif name == "PhysicsSenderRate" then
+                s.Network.PhysicsSendRate = tonumber(TargetFlag.Value)
+            else
+                s.Network[name] = val
+            end
+        end)
+    end
+})
+
+Window:SelectTab(1)
